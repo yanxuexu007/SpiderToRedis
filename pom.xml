@@ -34,5 +34,12 @@
 	    <artifactId>commons-codec</artifactId>
 	    <version>1.10</version>
 	</dependency>
+	<!-- 中文分词词库与方法 -->
+	<!-- https://mvnrepository.com/artifact/org.apdplat/word -->
+	<dependency>
+	    <groupId>org.apdplat</groupId>
+	    <artifactId>word</artifactId>
+	    <version>1.2</version>
+	</dependency>
   </dependencies>
 </project>
