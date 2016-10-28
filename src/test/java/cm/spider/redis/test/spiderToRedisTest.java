@@ -9,7 +9,7 @@ public class spiderToRedisTest {
 	public static void main(String[] args) {
 		try{
 			logger.info(" spiderToRedisTest starts ");
-			
+			String crawlArg="";
 			
 			logger.info(" spiderToRedisTest ends ");
 		}catch(Exception ex){
