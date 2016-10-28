@@ -11,7 +11,7 @@ public class spiderToRedisTest {
 	public static void main(String[] args) {
 		try{
 			logger.info(" spiderToRedisTest starts ");
-			ChineseWordsBaiduController.getBaiduFengYunKeyWords();
+			//ChineseWordsBaiduController.getBaiduFengYunKeyWords();
 			logger.info(" spiderToRedisTest ends ");
 		}catch(Exception ex){
 			logger.info(" spiderToRedisTest crashes :"+ex.getMessage());

@@ -12,6 +12,12 @@
 	    <artifactId>htmlunit</artifactId>
 	    <version>2.23</version>
 	</dependency>
+	<!-- 用于前后台实体对象与JSON对象之间的格式转换 -->
+    <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>fastjson</artifactId>
+        <version>1.2.6</version>
+    </dependency>
   	<!-- redis操作包  2016年9月1日版本-->
 	<dependency>
 	      	<groupId>redis.clients</groupId>

@@ -2,53 +2,30 @@ package cm.crawler.controllers;
 
 import org.apache.log4j.Logger;
 
-import cm.crawler.commons.ChineseWordsBaiduCrawl;
-import cm.redis.commons.ResourcesConfig;
-import edu.uci.ics.crawler4j.crawler.CrawlConfig;
-import edu.uci.ics.crawler4j.crawler.CrawlController;
-import edu.uci.ics.crawler4j.fetcher.PageFetcher;
-import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
-import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+
+//import cm.crawler.commons.ChineseWordsBaiduCrawl;
+//import cm.redis.commons.ResourcesConfig;
+//import edu.uci.ics.crawler4j.crawler.CrawlConfig;
+//import edu.uci.ics.crawler4j.crawler.CrawlController;
+//import edu.uci.ics.crawler4j.fetcher.PageFetcher;
+//import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
+//import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 
 /**
- * 百度热门搜索词抓取与加入redis库操作类
+ * 百度热门搜索词种子url与对应热词链接获取，并调用后台专门的百度热搜数据爬虫设计类，获取所有关键词进行保存
+ * 时间2016年10月30日，后续业务可能会随着页面做进一步更新
  * @author chinamobile
  */
 public class ChineseWordsBaiduController {
 	//用于日志的获取
 	public static Logger logger=Logger.getLogger(ChineseWordsBaiduController.class);
 	
-	public static void getBaiduFengYunKeyWords(){
-		String crawlStorageFolder =ResourcesConfig.WEBPAGE_SERVER;
-	    int numberOfCrawlers = 7;
-	    try {
-		    /*
-	         * Instantiate the ChineseWordsBaiduController for ChinesesWordsCrawler.
-	         */
-		    CrawlConfig config = new CrawlConfig();
-	        config.setCrawlStorageFolder(crawlStorageFolder);
-	        config.setMaxDepthOfCrawling(2);
-	        config.setMaxPagesToFetch(100);
-	        PageFetcher pageFetcher = new PageFetcher(config);
-	        RobotstxtConfig robotstxtConfig = new RobotstxtConfig();
-	        RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig, pageFetcher);
-	        CrawlController controller = new CrawlController(config, pageFetcher, robotstxtServer);
+	public static void main(String[] args) throws Exception {
 
-	        /*
-	         * For each ChinesesWordsCrawler, you need to add some seed urls. These are the first
-	         * URLs that are fetched and then the crawler starts following links
-	         * which are found in these pages
-	         */
-	        controller.addSeed("http://top.baidu.com/buzz?b=2&fr=topboards");
-	
-	        /*
-	         * Start the crawl. This is a blocking operation, meaning that your code
-	         * will reach the line after this only when crawling is finished.
-	         */
-	        controller.start(ChineseWordsBaiduCrawl.class, numberOfCrawlers);
-	    } catch (Exception ex) {
-	    	logger.info(" ChineseWordsBaiduController crashes :"+ex.getMessage());
-		}
 	}
+
 	
 }
