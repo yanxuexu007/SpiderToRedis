@@ -6,6 +6,7 @@ public class spiderToRedisTest {
 	
 	public static Logger logger=Logger.getLogger(spiderToRedisTest.class);
 	
+	//http://top.baidu.com/buzz?b=2&fr=topboards
 	public static void main(String[] args) {
 		try{
 			logger.info(" spiderToRedisTest starts ");

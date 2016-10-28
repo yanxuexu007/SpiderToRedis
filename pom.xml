@@ -6,11 +6,11 @@
   <name>spiderToRedis</name>
   <description>Put Web Site hotwords to Redis</description>
   <dependencies>
-  	<!-- https://mvnrepository.com/artifact/org.apache.nutch/nutch -->
+  	<!-- https://mvnrepository.com/artifact/edu.uci.ics/crawler4j -->
 	<dependency>
-	    <groupId>org.apache.nutch</groupId>
-	    <artifactId>nutch</artifactId>
-	    <version>2.3.1</version>
+	    <groupId>edu.uci.ics</groupId>
+	    <artifactId>crawler4j</artifactId>
+	    <version>4.2</version>
 	</dependency>
   	<!-- redis操作包  2016年9月1日版本-->
 	<dependency>
