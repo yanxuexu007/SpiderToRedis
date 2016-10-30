@@ -1,18 +1,11 @@
 package cm.crawler.controllers;
 
+import java.util.Map;
+
 import org.apache.log4j.Logger;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import cm.crawler.commons.ChineseWordsBaiduCrawl;
 
-//import cm.crawler.commons.ChineseWordsBaiduCrawl;
-//import cm.redis.commons.ResourcesConfig;
-//import edu.uci.ics.crawler4j.crawler.CrawlConfig;
-//import edu.uci.ics.crawler4j.crawler.CrawlController;
-//import edu.uci.ics.crawler4j.fetcher.PageFetcher;
-//import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
-//import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 
 /**
  * 百度热门搜索词种子url与对应热词链接获取，并调用后台专门的百度热搜数据爬虫设计类，获取所有关键词进行保存
@@ -24,8 +17,9 @@ public class ChineseWordsBaiduController {
 	public static Logger logger=Logger.getLogger(ChineseWordsBaiduController.class);
 	
 	public static void main(String[] args) throws Exception {
-
+		Map<String, String> topIndexList=null;
+		ChineseWordsBaiduCrawl baiduCrawler=new ChineseWordsBaiduCrawl();
+		topIndexList=baiduCrawler.getBDHotZhTypesAndLinks("http://top.baidu.com/boards?fr=topindex"); //种子文件起始地址
+		baiduCrawler.getBDHotZhDetail(topIndexList);
 	}
-
-	
 }
