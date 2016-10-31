@@ -1,6 +1,8 @@
 package cm.crawler.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 
@@ -17,29 +19,28 @@ public class ChineseWordsTaobaoController {
 	public static Logger logger=Logger.getLogger(ChineseWordsTaobaoController.class);
 	
 	public static void main(String[] args) throws Exception {
-		//测试从后台获取关键词,20161031,ok
+		//测试从后台获取淘宝的今日热门关注商品,20161031,ok
 		List<String> topIndexList=null;
-//		Map<String,  Set<String>> typesTopZhWords=null;
-//		Set<String> hotZhWords=null;
+		Set<String> hotZhWords=null;
 		ChineseWordsTaobaoCrawl taobaoCrawler=new ChineseWordsTaobaoCrawl();
 		int recnum=0;
-		topIndexList=taobaoCrawler.getTBTodayRankingList("http://top.taobao.com/index.php?topId=HOME"); //种子文件起始地址
-//		typesTopZhWords=baiduCrawler.getBDHotZhDetail(topIndexList);
-		if(topIndexList!=null&&topIndexList.size()>0){
-			for(String url : topIndexList){
-				recnum+=1;
-				System.out.println("	"+recnum+":	"+url);
-			}
-		}
-//			for (String key : typesTopZhWords.keySet()){
-//				System.out.println(key+": ");
-//				hotZhWords=typesTopZhWords.get(key);
-//				recnum=0;
-//				for (String str : hotZhWords) {
-//					  recnum+=1;
-//				      System.out.println("	"+recnum+":	"+str);
-//				}
+//		topIndexList=taobaoCrawler.getTBTodayRankingList("http://top.taobao.com/index.php?topId=HOME"); //种子文件起始地址
+//		//测试获取url列表的代码段
+//		if(topIndexList!=null&&topIndexList.size()>0){
+//			for(String url : topIndexList){
+//				recnum+=1;
+//				System.out.println("	"+recnum+":	"+url);
 //			}
 //		}
+		topIndexList=new ArrayList<String>();
+		topIndexList.add("http://top.taobao.com/index.php?spm=a1z5i.1.7.11.IofwAd&rank=focus&type=up&from=&s=80#ToSwitch");
+		hotZhWords=taobaoCrawler.getTBHotProductsDetail(topIndexList);
+		if(hotZhWords!=null&&hotZhWords.size()>0){
+			for (String str : hotZhWords) {
+				recnum+=1;
+				System.out.println("	"+recnum+":	"+str);
+			}
+		}
 	}
 }
+
