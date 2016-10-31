@@ -1,7 +1,6 @@
 package cm.spider.redis.test;
 
 import org.apache.log4j.Logger;
-import cm.crawler.controllers.ChineseWordsBaiduController;
 
 public class spiderToRedisTest {
 	

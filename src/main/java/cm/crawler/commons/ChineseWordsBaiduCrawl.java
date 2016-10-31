@@ -15,7 +15,7 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
-* 20161028 使用已有的htmlunit接口方法，对百度带有固定域名前缀的网页进行中文热词的抓取
+* 20161028 使用已有的htmlunit接口方法，对百度带有固定域名前缀的网页进行中文热词的抓取，百度网页较为简单的html静态页，直接htmlunit解析即可
 * @author chinamobile
 */
 public class ChineseWordsBaiduCrawl  {
@@ -30,7 +30,7 @@ public class ChineseWordsBaiduCrawl  {
 	 * 初始化模拟的爬虫浏览器客户端
 	 */
 	private void initWebClient() {
-		webClient=new WebClient(BrowserVersion.CHROME,"cmproxy.gmcc.net",8081); //如果是内网则需要配置代理,10.244.155.137
+		webClient=new WebClient(BrowserVersion.CHROME); //如果是内网则需要配置代理,10.244.155.137 ,"cmproxy.gmcc.net",8081
 		//htmlunit 对css和javascript的支持不好，请关闭
         webClient.getOptions().setJavaScriptEnabled(false);
         webClient.getOptions().setCssEnabled(false);
@@ -55,17 +55,7 @@ public class ChineseWordsBaiduCrawl  {
 	 */
 	/**
 	 * 所有的热词类别所在页面为http://top.baidu.com/boards?fr=topindex，类别与链接均包含在div id为main的层中
-	 * 例如：
-	 * <div id="main" class="main">
-	 *      <div class="all-list">
-	 *             <div class="hd">
-	 *                    <h3 class="title">
-	 *                          <a href="./category?c=12">
-	 *                            <span class="icon resou">&nbsp;<//span>热搜
-	 *                          <//a>
-	 *                    <//h3>
-	 *             <//div>
-	 *       <//div>
+	 * 分析页面获取的Xpath为//*[@class=\"item-list\"]/li/div/a[1]
 	 *  ...
 	 */
 	@SuppressWarnings("unchecked")
@@ -139,26 +129,7 @@ public class ChineseWordsBaiduCrawl  {
 	 * @return 返回大类别与对应热词集合构成的哈希信息结构
 	 */
 	/**
-	 * <ul class="item-list">
-	 * 		<li class="current">
-	 * 			<div class="item-hd">
-	 * 				<span class="num-top">1<//span>
-	 * 				<a target="_blank" title="跨界喜剧王" data="2|2" class="list-title" href="http://www.baidu.com/baidu?cl=3&tn=SE_baiduhomet8_jmjb7mjw&fr=top1000&wd=%BF%E7%BD%E7%CF%B2%BE%E7%CD%F5" href_top="./detail?b=2&w=%BF%E7%BD%E7%CF%B2%BE%E7%CD%F5&c=12">跨界喜剧王<//a>
-	 * 				<span class="icon-rise">916602<//span>
-	 * 				<a href="./detail?b=2&w=%BF%E7%BD%E7%CF%B2%BE%E7%CD%F5&c=12" class="icon-search icon-xiang-imp" target="_blank">search<//a>
-	 * 			<//div>
-	 * 		<div class="item-bd" style="display: block; height: 122px;"><//div>
-	 * 		<//li>
-	 * 		<li>
-	 * 			<div class="item-hd">
-	 * 				<span class="num-top">2<//span>
-	 * 				<a target="_blank" title="斗鱼tv" data="2|2" class="list-title" href="http://www.baidu.com/baidu?cl=3&tn=SE_baiduhomet8_jmjb7mjw&fr=top1000&wd=%B6%B7%D3%E3tv" href_top="./detail?b=2&w=%B6%B7%D3%E3tv&c=12">斗鱼tv<//a>
-	 * 				<span class="icon-fall">575693</span>
-	 * 				<a href="./detail?b=2&w=%B6%B7%D3%E3tv&c=12" class="icon-search icon-xiang-imp" target="_blank">search<//a>
-	 * 			<//div>
-	 * 			<div class="item-bd" style="display:none;"><//div>
-	 * 		<//li>
-	 *  ......
+	 * 分析页面获取的Xpath为//*[@class=\"all-list\"]/div[1]/h3/a
 	 */
 	@SuppressWarnings("unchecked")
 	public Map<String, Set<String>> getBDHotZhDetail(Map<String, String> ZhTypesLinks){

@@ -2,48 +2,52 @@ package cm.crawler.commons;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.DomElement;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-
+/**
+* 20161031 由于京东页面同样涉及比较复杂的js生成，使用已有的Selenium方法，对淘宝的今日关注上升排行榜进行爬虫
+* @author chinamobile
+*/
 public class ChineseWordsJingDongCrawl {
 	//日志记录
 	public static Logger logger=Logger.getLogger(ChineseWordsJingDongCrawl.class);
 	//http和https的正则表达式
 	private final static Pattern URLFILTER=Pattern.compile("(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]");
 	//模拟浏览器客户端变量
-	private WebClient webClient;	
-	
+	//模拟浏览器客户端变量
+	private WebDriver webDriver;	
+
 	/**
-	 * 初始化模拟的爬虫浏览器客户端
+	 * 初始化模拟的爬虫浏览器客户端Selenium
 	 */
-	private void initWebClient() {
-		webClient=new WebClient(BrowserVersion.CHROME,"cmproxy.gmcc.net",8081); //如果是内网则需要配置代理,10.244.155.137 
-		//htmlunit 淘宝页面需要使用js生成，需要配置js enable及相关参数，具体如下
-        webClient.getOptions().setJavaScriptEnabled(true);
-        webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
-        webClient.getOptions().setThrowExceptionOnScriptError(false);
-        webClient.getOptions().setCssEnabled(false);
-        webClient.getOptions().setDoNotTrackEnabled(true);
-        webClient.getOptions().setUseInsecureSSL(true);		//支持https
-        webClient.getOptions().setTimeout(60000); 		  		//设置连接超时时间30S。如果为0，则无限期等待
-        webClient.waitForBackgroundJavaScript(60000);
-        webClient.setAjaxController(new NicelyResynchronizingAjaxController());
-        webClient.setJavaScriptTimeout(60000);
+	private void initWebDriver() {
+		System.setProperty("webdriver.chrome.driver", "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe"); //必须配置chrome的路径
+		webDriver=new ChromeDriver(); 
+		webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		//如果是内网则需要配置代理,10.244.155.137 ,"cmproxy.gmcc.net",8081
+//		String proxyIpAndPort= "10.244.155.137:8081";
+//		DesiredCapabilities cap = new DesiredCapabilities();
+//		Proxy proxy=new Proxy();
+//		proxy.setHttpProxy(proxyIpAndPort).setFtpProxy(proxyIpAndPort).setSslProxy(proxyIpAndPort);
+//		cap.setCapability(CapabilityType.PROXY, proxy);	//手动添加代理
+//		cap.setCapability(CapabilityType.ForSeleniumServer.AVOIDING_PROXY, true);
+//		cap.setCapability(CapabilityType.ForSeleniumServer.ONLY_PROXYING_SELENIUM_TRAFFIC, true);
+//		System.setProperty("http.nonProxyHosts", "localhost"); //某些不需要代理的配置
 	}
 	
 	/**
 	 * 关闭清理模拟的爬虫浏览器客户端
 	 */
-	private void closeWebClient(){
-		if(webClient!=null)webClient.close();
-		webClient=null;
+	private void closeWebDriver(){
+		if(webDriver!=null)webDriver.close();
+		webDriver=null;
 	}
 	
 	/**
@@ -56,49 +60,43 @@ public class ChineseWordsJingDongCrawl {
 	 * 今日关注完整榜单链接获取的页面为https://top.jd.com/#search，
 	 * 对应热词可以通过页面元素分析，直接Copy Xpath获得：
 	 * 今日关注完整榜单Xpath：//*[@id="topSearchListcate9999_1DAY"]/li/div[1]/a/div[1]/div/p[1]
+	 * ......
 	 */
-	@SuppressWarnings("unchecked")
 	public List<String> getJDTodayRankingListWords(String href){
 		List<String> topWords=null;
-		HtmlPage page=null;						//页面对象
-		DomElement childelement=null;		//存放子节点对象
-		List<DomElement> crawltags=null;	//页面中涉及需要抓取的元素文档对象集合
-		String hotZh=null;							//商品列表的页面url
+		List<WebElement> crawltags=null;		//页面中涉及需要抓取的元素文档对象集合
+		WebElement childelement=null;			//页面中对应的元素
+		String hotZh=null;							//商品列表的名称
 		try{
-			initWebClient();
+			initWebDriver();
+			topWords=new ArrayList<String>();
 			if(href!=null&&URLFILTER.matcher(href).matches()){
 		        //获取首页页面
-		        page = webClient.getPage(href);
+		        webDriver.get(href);
 		        
 		        //京东排行首页页面规律分析，详见本方法中有关页面的注释说明，以下代码针对页面分析之后做的开发，页面发生变化，则代码需要修改
 		        //20161031深度定制爬虫逻辑如下：
-		        if(page!=null){
-		        	topWords=new ArrayList<String>();
-		        	crawltags=(List<DomElement>)page.getByXPath("//*[@id=\"topSearchListcate9999_1DAY\"]/li/div[1]/a/div[1]/div/p[1]"); //获取热搜产品
-		        	if(crawltags!=null&&crawltags.size()>0){
-		        		for(int i=0;i<crawltags.size();i++){
-		        			childelement=(crawltags.get(i));
-		        			if(childelement!=null){
-		        				hotZh=childelement.asText();
-		        				if(hotZh!=null)topWords.add(hotZh);
-		        			}
-			        	}
+		        crawltags=webDriver.findElements(By.xpath("//*[@id=\"topSearchListcate9999_1DAY\"]/li/div[1]/a/div[1]/div/p[1]")); //获取热搜产品
+		        if(crawltags!=null&&crawltags.size()>0){
+	        		for(int i=0;i<crawltags.size();i++){
+	        			childelement=(crawltags.get(i));
+	        			if(childelement!=null){
+	        				hotZh=childelement.getText();
+	        				if(hotZh!=null)topWords.add(hotZh);
+	        			}
 		        	}
-		        }
+	        	}
 			}
 		}catch(Exception ex){
 			logger.info(" getTBTodayRankingList crashes :"+ex.getMessage());
 			topWords=null;
 		}finally {
 			//释放内存
-			if(page!=null)page.cleanUp();
-			closeWebClient();
-			page=null;
+			closeWebDriver();
 			childelement=null;		//存放子节点对象
 			crawltags=null;			//div中涉及需要抓取的元素集合
 			hotZh=null;				//热搜词类别对应的url
 		}
 		return topWords;
 	}
-
 }

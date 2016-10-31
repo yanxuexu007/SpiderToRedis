@@ -1,6 +1,5 @@
 package cm.crawler.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -24,16 +23,7 @@ public class ChineseWordsTaobaoController {
 		Set<String> hotZhWords=null;
 		ChineseWordsTaobaoCrawl taobaoCrawler=new ChineseWordsTaobaoCrawl();
 		int recnum=0;
-//		topIndexList=taobaoCrawler.getTBTodayRankingList("http://top.taobao.com/index.php?topId=HOME"); //种子文件起始地址
-//		//测试获取url列表的代码段
-//		if(topIndexList!=null&&topIndexList.size()>0){
-//			for(String url : topIndexList){
-//				recnum+=1;
-//				System.out.println("	"+recnum+":	"+url);
-//			}
-//		}
-		topIndexList=new ArrayList<String>();
-		topIndexList.add("http://top.taobao.com/index.php?spm=a1z5i.1.7.11.IofwAd&rank=focus&type=up&from=&s=80#ToSwitch");
+		topIndexList=taobaoCrawler.getTBTodayRankingList("https://top.taobao.com/index.php?topId=HOME"); //种子文件起始地址
 		hotZhWords=taobaoCrawler.getTBHotProductsDetail(topIndexList);
 		if(hotZhWords!=null&&hotZhWords.size()>0){
 			for (String str : hotZhWords) {
@@ -44,3 +34,12 @@ public class ChineseWordsTaobaoController {
 	}
 }
 
+//测试获取url列表的代码段
+//if(topIndexList!=null&&topIndexList.size()>0){
+//	for(String url : topIndexList){
+//		recnum+=1;
+//		System.out.println("	"+recnum+":	"+url);
+//	}
+//}
+////topIndexList=new ArrayList<String>();
+////topIndexList.add("http://top.taobao.com/index.php?spm=a1z5i.1.7.11.IofwAd&rank=focus&type=up&from=&s=80#ToSwitch");
