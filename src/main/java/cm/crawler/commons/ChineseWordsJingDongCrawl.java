@@ -27,8 +27,11 @@ public class ChineseWordsJingDongCrawl {
 		webClient=new WebClient(BrowserVersion.CHROME,"cmproxy.gmcc.net",8081); //如果是内网则需要配置代理,10.244.155.137 
 		//htmlunit 淘宝页面需要使用js生成，需要配置js enable及相关参数，具体如下
         webClient.getOptions().setJavaScriptEnabled(true);
+        webClient.getOptions().setRedirectEnabled(true);
         webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
         webClient.getOptions().setThrowExceptionOnScriptError(false);
+        webClient.getOptions().setAppletEnabled(false);
+        webClient.getOptions().setActiveXNative(false);
         webClient.getOptions().setCssEnabled(false);
         webClient.getOptions().setDoNotTrackEnabled(true);
         webClient.getOptions().setUseInsecureSSL(true);		//支持https
@@ -69,6 +72,7 @@ public class ChineseWordsJingDongCrawl {
 			if(href!=null&&URLFILTER.matcher(href).matches()){
 		        //获取首页页面
 		        page = webClient.getPage(href);
+		        Thread.sleep(10000);//主要是这个线程的等待 因为js加载也是需要时间的
 		        
 		        //京东排行首页页面规律分析，详见本方法中有关页面的注释说明，以下代码针对页面分析之后做的开发，页面发生变化，则代码需要修改
 		        //20161031深度定制爬虫逻辑如下：

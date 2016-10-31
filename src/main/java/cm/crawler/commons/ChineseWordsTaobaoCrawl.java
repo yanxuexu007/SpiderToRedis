@@ -33,10 +33,11 @@ public class ChineseWordsTaobaoCrawl {
 		webClient=new WebClient(BrowserVersion.CHROME,"cmproxy.gmcc.net",8081); //如果是内网则需要配置代理,10.244.155.137 
 		//htmlunit 淘宝页面需要使用js生成，需要配置js enable及相关参数，具体如下
         webClient.getOptions().setJavaScriptEnabled(true);
+        webClient.getOptions().setRedirectEnabled(true);
         webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
         webClient.getOptions().setThrowExceptionOnScriptError(false);
-//        webClient.getOptions().setAppletEnabled(false);
-//        webClient.getOptions().setActiveXNative(false);
+        webClient.getOptions().setAppletEnabled(true);
+        webClient.getOptions().setActiveXNative(true);
         webClient.getOptions().setCssEnabled(false);
         webClient.getOptions().setDoNotTrackEnabled(true);
         webClient.getOptions().setUseInsecureSSL(true);		//支持https
@@ -79,6 +80,7 @@ public class ChineseWordsTaobaoCrawl {
 			if(href!=null&&URLFILTER.matcher(href).matches()){
 		        //获取首页页面
 		        page = webClient.getPage(href);
+		        Thread.sleep(10000);//主要是这个线程的等待 因为js加载也是需要时间的
 		        
 		        //淘宝排行首页页面规律分析，详见本方法中有关页面的注释说明，以下代码针对页面分析之后做的开发，页面发生变化，则代码需要修改
 		        //20161031深度定制爬虫逻辑如下：
@@ -88,7 +90,7 @@ public class ChineseWordsTaobaoCrawl {
 //		        	hotUrl=page.asXml();					
 //		        	topPagesAndLinks.add(hotUrl);
 		        	//测试代码结束
-		        	crawltags=(List<DomElement>)page.getByXPath("//*[@id=\"bang-tubang\"]/div/div[1]/div[2]/div[2]/div[2]/a"); //获取main中所有的h3标签下的a内容
+		        	crawltags=(List<DomElement>)page.getByXPath("//*[@id=\"bang-tubang\"]/div/div[1]/div[2]/div[2]/div[2]/a"); //获取标签下的a内容的中文
 		        	if(crawltags!=null&&crawltags.size()>0){
 		        		for(int i=0;i<crawltags.size();i++){
 		        			childelement=(crawltags.get(i));
@@ -174,12 +176,12 @@ public class ChineseWordsTaobaoCrawl {
 	        	if(hotUrl!=null&&URLFILTER.matcher(hotUrl).matches()){
 			        //获取页面
 					page = webClient.getPage(hotUrl);
-//					ZhWord=page.asText();
-//					if(ZhWord!=null)hotProductsWords.add(ZhWord);
+					Thread.sleep(10000);//主要是这个线程的等待 因为js加载也是需要时间的
+
 			        //淘宝今日关注热门商品页面规律分析，详见本方法中有关页面的注释说明，以下代码针对页面分析之后做的开发，页面发生变化，则代码需要修改
 			        //20161031深度定制爬虫逻辑如下：
 			        if(page!=null){
-			        	crawltags=(List<DomElement>)page.getByXPath("//*[@id=\"bang-wbang\"]/div/div/div/ul/li/div/div[2]/div/a"); 		//获取main中所有的ul标签
+			        	crawltags=(List<DomElement>)page.getByXPath("//*[@id=\"bang-wbang\"]/div/div/div/ul/li/div/div[2]/div/a"); //获取列表标签
 			        	if(crawltags!=null&&crawltags.size()>0){
 			        		for(int i=0;i<crawltags.size();i++)
 			        		{	
