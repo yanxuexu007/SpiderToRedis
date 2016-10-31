@@ -114,7 +114,7 @@ public class ChineseWordsBaiduCrawl  { //extends WebCrawler
 			childelement=null;		//存放子节点对象
 			crawltags=null;			//div中涉及需要抓取的元素集合
 			hotUrl=null;				//热搜词类别对应的url
-			hotZh=null;   				//热搜词类别
+			hotZh=null;   			//热搜词类别
 			pos=0;						//截取url字段位置标识
 		}
 		return allTypesAndLinks;
@@ -139,7 +139,7 @@ public class ChineseWordsBaiduCrawl  { //extends WebCrawler
 		String ZhWord=null;						//标签中的热词
 		Set<String> ZhWords=null;			//热搜词集合，无重复
 		try{
-			webClient=new WebClient(BrowserVersion.CHROME);
+			webClient=new WebClient(BrowserVersion.CHROME,"cmproxy.gmcc.net",8081); //如果是公司大奖，需要添加代理
 			//htmlunit 对css和javascript的支持不好，请关闭
 	        webClient.getOptions().setJavaScriptEnabled(false);
 	        webClient.getOptions().setCssEnabled(false);
@@ -163,6 +163,7 @@ public class ChineseWordsBaiduCrawl  { //extends WebCrawler
 		        		for(int i=0;i<crawltags.size();i++)
 		        		{	
 		        			ZhWord=crawltags.get(i).getAttribute("title");
+		        			ZhWord=new String(ZhWord.getBytes("GBK"), "UTF-8");
 		        			//System.out.println();
 		        			System.out.println(i+": "+ZhWord);
 		        		}
