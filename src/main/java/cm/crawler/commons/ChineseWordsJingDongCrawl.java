@@ -21,7 +21,6 @@ public class ChineseWordsJingDongCrawl {
 	//http和https的正则表达式
 	private final static Pattern URLFILTER=Pattern.compile("(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]");
 	//模拟浏览器客户端变量
-	//模拟浏览器客户端变量
 	private WebDriver webDriver;	
 
 	/**
@@ -46,7 +45,7 @@ public class ChineseWordsJingDongCrawl {
 	 * 关闭清理模拟的爬虫浏览器客户端
 	 */
 	private void closeWebDriver(){
-		if(webDriver!=null)webDriver.close();
+		if(webDriver!=null)webDriver.quit();
 		webDriver=null;
 	}
 	

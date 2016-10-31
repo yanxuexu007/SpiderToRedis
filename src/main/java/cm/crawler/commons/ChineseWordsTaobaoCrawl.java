@@ -47,7 +47,7 @@ public class ChineseWordsTaobaoCrawl {
 	 * 关闭清理模拟的爬虫浏览器客户端
 	 */
 	private void closeWebDriver(){
-		if(webDriver!=null)webDriver.close();
+		if(webDriver!=null)webDriver.quit();
 		webDriver=null;
 	}
 	
