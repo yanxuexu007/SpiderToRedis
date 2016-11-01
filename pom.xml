@@ -6,23 +6,17 @@
   <name>spiderToRedis</name>
   <description>Put Web Site hotwords to Redis</description>
   <dependencies>
-  	<!-- https://mvnrepository.com/artifact/net.sourceforge.htmlunit/htmlunit -->
+	<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-server -->
 	<dependency>
-	    <groupId>net.sourceforge.htmlunit</groupId>
-	    <artifactId>htmlunit</artifactId>
-	    <version>2.23</version>
+	    <groupId>org.seleniumhq.selenium</groupId>
+	    <artifactId>selenium-server</artifactId>
+	    <version>3.0.1</version>
 	</dependency>
-	<!-- https://mvnrepository.com/artifact/us.codecraft/webmagic-core -->
+	<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
 	<dependency>
-	    <groupId>us.codecraft</groupId>
-	    <artifactId>webmagic-core</artifactId>
-	    <version>0.5.3</version>
-	</dependency>
-	<!-- https://mvnrepository.com/artifact/us.codecraft/webmagic-extension -->
-	<dependency>
-	    <groupId>us.codecraft</groupId>
-	    <artifactId>webmagic-extension</artifactId>
-	    <version>0.5.3</version>
+	    <groupId>org.seleniumhq.selenium</groupId>
+	    <artifactId>selenium-java</artifactId>
+	    <version>3.0.1</version>
 	</dependency>
 	<!-- 用于前后台实体对象与JSON对象之间的格式转换 -->
     <dependency>
