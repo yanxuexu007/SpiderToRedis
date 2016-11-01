@@ -10,12 +10,9 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 import cm.redis.commons.ResourcesConfig;
 
@@ -38,15 +35,8 @@ public class ChineseWordsBaiduCrawl  {
 		System.setProperty(ResourcesConfig.BROWSER_DRIVER_NAME, ResourcesConfig.BROWSER_DRIVER_POSITION); //必须配置chromedriver的路径
 		webDriver=new ChromeDriver(); 
 		webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		//如果是内网则需要配置代理,10.244.155.137 ,"cmproxy.gmcc.net",8081
-//		String proxyIpAndPort= "10.244.155.137:8081";
-//		DesiredCapabilities cap = new DesiredCapabilities();
-//		Proxy proxy=new Proxy();
-//		proxy.setHttpProxy(proxyIpAndPort).setFtpProxy(proxyIpAndPort).setSslProxy(proxyIpAndPort);
-//		cap.setCapability(CapabilityType.PROXY, proxy);	//手动添加代理
-//		cap.setCapability(CapabilityType.ForSeleniumServer.AVOIDING_PROXY, true);
-//		cap.setCapability(CapabilityType.ForSeleniumServer.ONLY_PROXYING_SELENIUM_TRAFFIC, true);
-//		System.setProperty("http.nonProxyHosts", "localhost"); //某些不需要代理的配置
+		//如果内网需要配置代理，信息是,10.244.155.137 ,"cmproxy.gmcc.net",8081
+		//因为selenium模拟了浏览器，所以只要浏览器配置了代理即可，代码中不需要配置
 	}
 	
 	/**

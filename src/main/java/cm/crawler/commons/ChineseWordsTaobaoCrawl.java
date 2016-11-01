@@ -1,6 +1,5 @@
 package cm.crawler.commons;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -9,12 +8,9 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 import cm.redis.commons.ResourcesConfig;
 
@@ -37,15 +33,8 @@ public class ChineseWordsTaobaoCrawl {
 		System.setProperty(ResourcesConfig.BROWSER_DRIVER_NAME, ResourcesConfig.BROWSER_DRIVER_POSITION); //必须配置chromedriver的路径
 		webDriver=new ChromeDriver(); 
 		webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		//如果是内网则需要配置代理,10.244.155.137 ,"cmproxy.gmcc.net",8081
-//		String proxyIpAndPort= "10.244.155.137:8081";
-//		DesiredCapabilities cap = new DesiredCapabilities();
-//		Proxy proxy=new Proxy();
-//		proxy.setHttpProxy(proxyIpAndPort).setFtpProxy(proxyIpAndPort).setSslProxy(proxyIpAndPort);
-//		cap.setCapability(CapabilityType.PROXY, proxy);	//手动添加代理
-//		cap.setCapability(CapabilityType.ForSeleniumServer.AVOIDING_PROXY, true);
-//		cap.setCapability(CapabilityType.ForSeleniumServer.ONLY_PROXYING_SELENIUM_TRAFFIC, true);
-//		System.setProperty("http.nonProxyHosts", "localhost"); //某些不需要代理的配置
+		//如果内网需要配置代理，信息是,10.244.155.137 ,"cmproxy.gmcc.net",8081
+		//因为selenium模拟了浏览器，所以只要浏览器配置了代理即可，代码中不需要配置
 	}
 	
 	/**
@@ -68,15 +57,15 @@ public class ChineseWordsTaobaoCrawl {
 	 * 今日关注完整榜单Xpath：//*[@id="bang-tubang"]/div/div[1]/div[2]/div[2]/div[2]/a
 	 * 后续页面的Xpath：//*[@id="bang-pager"]/div/div/div/ul/li/a
 	 */
-	public List<String> getTBTodayRankingList(String href){
-		List<String> topPagesAndLinks=null;
+	public Set<String> getTBTodayRankingList(String href){
+		Set<String> topPagesAndLinks=null;
 		List<WebElement> crawltags=null;		//页面中涉及需要抓取的元素文档对象集合
 		WebElement childelement=null;			//页面中对应的元素
 		String hotUrl=null;							//商品列表的页面url
 		int pos=0;										//截取url字段位置标识
 		try{
 			initWebDriver();
-			topPagesAndLinks=new ArrayList<String>();
+			topPagesAndLinks=new HashSet<String>();
 			if(href!=null&&URLFILTER.matcher(href).matches()){
 				//获取首页页面
 				webDriver.get(href);
@@ -141,7 +130,7 @@ public class ChineseWordsTaobaoCrawl {
 	 * 对应页面的Xpath：//*[@id="bang-wbang"]/div/div/div/ul/li/div/div[2]/div/a
 	 *  ......
 	 */
-	public Set<String> getTBHotProductsDetail(List<String> topPagesAndLinks){
+	public Set<String> getTBHotProductsDetail(Set<String> topPagesAndLinks){
 		if(topPagesAndLinks==null||topPagesAndLinks.size()<=0)return null;
 		Set<String> hotProductsWords=null;
 		String hotUrl=null;						//商品列表对应的页面url
@@ -163,8 +152,7 @@ public class ChineseWordsTaobaoCrawl {
 		        		for(int i=0;i<crawltags.size();i++)
 		        		{	
 		        			ZhWord=crawltags.get(i).getText();	
-		        			if(ZhWord!=null)hotProductsWords.add(ZhWord);
-		        			ZhWord=null;
+		        			if(ZhWord!=null&&ZhWord.length()>1)hotProductsWords.add(ZhWord);
 		        		}
 			        }
 	        	}

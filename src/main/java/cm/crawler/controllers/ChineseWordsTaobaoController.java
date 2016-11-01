@@ -1,13 +1,10 @@
 package cm.crawler.controllers;
 
-import java.util.List;
 import java.util.Set;
 import org.apache.log4j.Logger;
 
-import cm.crawler.commons.ChineseWordsTaobaoCrawl;
-
 //import org.apache.commons.codec.binary.Base64;
-//import cm.crawler.commons.ChineseWordsTaobaoCrawl;
+import cm.crawler.commons.ChineseWordsTaobaoCrawl;
 
 /**
  * 百度热门搜索词种子url与对应热词链接获取，并调用后台专门的百度热搜数据爬虫设计类，获取所有关键词进行redis缓存，大约每小时更新一次热词字典
@@ -20,7 +17,7 @@ public class ChineseWordsTaobaoController{
 
 	public static void main(String[] args) throws Exception {
 		//测试从后台获取淘宝的今日热门关注商品,20161031,ok
-		List<String> topIndexList=null;
+		Set<String> topIndexList=null;
 		Set<String> hotZhWords=null;
 		ChineseWordsTaobaoCrawl taobaoCrawler=new ChineseWordsTaobaoCrawl();
 		int recnum=0;
