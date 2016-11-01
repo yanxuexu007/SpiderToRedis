@@ -10,9 +10,14 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+import cm.redis.commons.ResourcesConfig;
 
 /**
 * 20161028 使用已有的Selenium方法，对百度带有固定域名前缀的网页进行中文热词的抓取，百度网页较为简单的html静态页，直接htmlunit解析也可以
@@ -30,7 +35,7 @@ public class ChineseWordsBaiduCrawl  {
 	 * 初始化模拟的爬虫浏览器客户端Selenium
 	 */
 	private void initWebDriver() {
-		System.setProperty("webdriver.chrome.driver", "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe"); //必须配置chrome的路径
+		System.setProperty(ResourcesConfig.BROWSER_DRIVER_NAME, ResourcesConfig.BROWSER_DRIVER_POSITION); //必须配置chromedriver的路径
 		webDriver=new ChromeDriver(); 
 		webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		//如果是内网则需要配置代理,10.244.155.137 ,"cmproxy.gmcc.net",8081

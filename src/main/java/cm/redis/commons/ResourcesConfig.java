@@ -25,6 +25,11 @@ public class ResourcesConfig {
 	
 	// 存放网页的位置
 	//public final static String WEBPAGE_SERVER="/home/storm/netantdata/crawlers/";  //正式服务器地址
-	public final static String WEBPAGE_SERVER="E:/";  						//测试地址				
+	//public final static String WEBPAGE_SERVER="E:/";  						//测试地址	
+	
+	//爬虫浏览器驱动信息配置
+	public final static String BROWSER_DRIVER_NAME="webdriver.chrome.driver";
+	public final static String BROWSER_DRIVER_POSITION="C:\\Program Files\\Google\\Driver\\chromedriver.exe";
+	
 	
 }

@@ -9,9 +9,14 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+import cm.redis.commons.ResourcesConfig;
 
 /**
 * 20161031 由于淘宝页面涉及比较复杂的js生成，使用已有的Selenium方法，对淘宝的今日关注上升排行榜进行爬虫
@@ -29,7 +34,7 @@ public class ChineseWordsTaobaoCrawl {
 	 * 初始化模拟的爬虫浏览器客户端Selenium
 	 */
 	private void initWebDriver() {
-		System.setProperty("webdriver.chrome.driver", "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe"); //必须配置chrome的路径
+		System.setProperty(ResourcesConfig.BROWSER_DRIVER_NAME, ResourcesConfig.BROWSER_DRIVER_POSITION); //必须配置chromedriver的路径
 		webDriver=new ChromeDriver(); 
 		webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		//如果是内网则需要配置代理,10.244.155.137 ,"cmproxy.gmcc.net",8081
