@@ -5,10 +5,6 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 
 import cm.crawler.commons.ChineseWordsTaobaoCrawl;
-import us.codecraft.webmagic.Page;
-import us.codecraft.webmagic.Site;
-import us.codecraft.webmagic.Spider;
-import us.codecraft.webmagic.processor.PageProcessor;
 
 //import org.apache.commons.codec.binary.Base64;
 //import cm.crawler.commons.ChineseWordsTaobaoCrawl;
