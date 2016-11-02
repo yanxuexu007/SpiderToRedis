@@ -5,19 +5,19 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 
 //import org.apache.commons.codec.binary.Base64;
-import cm.crawler.commons.ChineseWordsJingDongCrawl;
+import cm.crawler.commons.ChineseWordsVIPCrawl;
 
 
-public class ChineseWordsJingDongController {
+public class ChineseWordsVIPController {
 	//用于日志的获取
-	public static Logger logger=Logger.getLogger(ChineseWordsJingDongController.class);
+	public static Logger logger=Logger.getLogger(ChineseWordsVIPController.class);
 	
 	public static void main(String[] args) throws Exception {
-		//测试从后台获取京东的今日热门关注商品,20161031,ok
+		//测试从后台获取唯品会的今日热门关注商品列表,20161031,ok
 		Set<String> topIndexList=null;
-		ChineseWordsJingDongCrawl jingdongCrawler=new ChineseWordsJingDongCrawl();
+		ChineseWordsVIPCrawl vipCrawler=new ChineseWordsVIPCrawl();
 		int recnum=0;
-		topIndexList=jingdongCrawler.getJDTodayRankingListWords("https://top.jd.com/#search"); //种子文件起始地址
+		topIndexList=vipCrawler.getVIPHotProductWords("http://category.vip.com/"); //种子文件起始地址
 		//测试获取搜索词列表的代码段
 		if(topIndexList!=null&&topIndexList.size()>0){
 			for(String url : topIndexList){

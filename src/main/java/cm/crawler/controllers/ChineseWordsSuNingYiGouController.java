@@ -13,7 +13,7 @@ public class ChineseWordsSuNingYiGouController {
 	public static Logger logger=Logger.getLogger(ChineseWordsSuNingYiGouController.class);
 	
 	public static void main(String[] args) throws Exception {
-		//测试从后台获取淘宝的今日热门关注商品,20161031,ok
+		//测试从后台获取苏宁易购的今日热门关注商品,20161031,ok
 		Set<String> topIndexList=null;
 		ChineseWordsSuNingYiGouCrawl suningyigouCrawler=new ChineseWordsSuNingYiGouCrawl();
 		int recnum=0;

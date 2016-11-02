@@ -15,12 +15,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import cm.redis.commons.ResourcesConfig;
 
 /**
-* 20161031 由于京东页面同样涉及比较复杂的js生成，使用已有的Selenium方法，对淘宝的今日关注上升排行榜进行爬虫
+* 20161102 使用已有的Selenium方法，对唯品会各类别的热搜商品进行爬虫获取
 * @author chinamobile
 */
-public class ChineseWordsJingDongCrawl {
+public class ChineseWordsVIPCrawl {
 	//日志记录
-	public static Logger logger=Logger.getLogger(ChineseWordsJingDongCrawl.class);
+	public static Logger logger=Logger.getLogger(ChineseWordsVIPCrawl.class);
 	//http和https的正则表达式
 	private final static Pattern URLFILTER=Pattern.compile("(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]");
 	//模拟浏览器客户端变量
@@ -48,16 +48,17 @@ public class ChineseWordsJingDongCrawl {
 	/**
 	 * 根据排行榜首页url，获取今日关注的完整榜单热搜词l信息
 	 * 使用的操作类是Selenium，它的基本原理是模拟浏览器获取文档页面，元素标签等对应的信息，并提供api进行属性获取，适合于快速开发自定义爬虫的工具
-	 * @param href 种子首页路径https://top.jd.com/#search
-	 * @return 热搜索商品列表
+	 * @param href 种子首页路径http://category.vip.com/
+	 * @return 热搜商品列表
 	 */
 	/**
-	 * 今日关注完整榜单链接获取的页面为https://top.jd.com/#search，
+	 * 今日关注完整榜单链接获取的页面为http://category.vip.com/
 	 * 对应热词可以通过页面元素分析，直接Copy Xpath获得：
-	 * 今日关注完整榜单Xpath：//*[@id="topSearchListcate9999_1DAY"]/li/div[1]/a/div[1]/div/p[1]
+	 * 榜单热搜词Xpath：//*[@id="floorList"]/div/div[2]/div[1]/div/div/div[1]/a
+	 * 	榜单热搜词Xpath：//*[@id="floorList"]/div/div[2]/div[1]/div/div/div[2]/div/a
 	 * ......
 	 */
-	public Set<String> getJDTodayRankingListWords(String href){
+	public Set<String> getVIPHotProductWords(String href){
 		Set<String> topWords=null;
 		List<WebElement> crawltags=null;		//页面中涉及需要抓取的元素文档对象集合
 		WebElement childelement=null;			//页面中对应的元素
@@ -69,21 +70,31 @@ public class ChineseWordsJingDongCrawl {
 		        //获取首页页面
 		        webDriver.get(href);
 		        
-		        //京东排行首页页面规律分析，详见本方法中有关页面的注释说明，以下代码针对页面分析之后做的开发，页面发生变化，则代码需要修改
+		        //唯品会排行首页页面规律分析，详见本方法中有关页面的注释说明，以下代码针对页面分析之后做的开发，页面发生变化，则代码需要修改
 		        //20161031深度定制爬虫逻辑如下：
-		        crawltags=webDriver.findElements(By.xpath("//*[@id=\"topSearchListcate9999_1DAY\"]/li/div[1]/a/div[1]/div/p[1]")); //获取热搜产品
+		        crawltags=webDriver.findElements(By.xpath("//*[@id=\"floorList\"]/div/div[2]/div[1]/div/div/div[1]/a")); //获取热搜产品类别
 		        if(crawltags!=null&&crawltags.size()>0){
 	        		for(int i=0;i<crawltags.size();i++){
 	        			childelement=(crawltags.get(i));
 	        			if(childelement!=null){
 	        				hotZh=childelement.getText();
-	        				if(hotZh!=null&&hotZh.length()>1)topWords.add(hotZh);
+	        				if(hotZh!=null&&hotZh.length()>1)topWords.add(hotZh.trim());
 	        			}
-		        	}
-	        	}
+	        		}
+		        }
+		        crawltags=webDriver.findElements(By.xpath("//*[@id=\"floorList\"]/div/div[2]/div[1]/div/div/div[2]/div/a")); //获取热搜产品
+		        if(crawltags!=null&&crawltags.size()>0){
+	        		for(int i=0;i<crawltags.size();i++){
+	        			childelement=(crawltags.get(i));
+	        			if(childelement!=null){
+	        				hotZh=childelement.getText();
+	        				if(hotZh!=null&&hotZh.length()>1)topWords.add(hotZh.trim());
+	        			}
+	        		}
+		        }
 			}
 		}catch(Exception ex){
-			logger.info(" getTBTodayRankingList crashes :"+ex.getMessage());
+			logger.info(" getVIPHotProductWords crashes :"+ex.getMessage());
 			topWords=null;
 		}finally {
 			//释放内存

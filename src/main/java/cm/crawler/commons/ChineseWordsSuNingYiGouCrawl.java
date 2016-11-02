@@ -62,7 +62,7 @@ public class ChineseWordsSuNingYiGouCrawl {
 		Set<String> topWords=null;
 		List<WebElement> crawltags=null;		//页面中涉及需要抓取的元素文档对象集合
 		WebElement childelement=null;			//页面中对应的元素
-		String hotZh=null;							//商品列表的名称
+		String hotZh=null;								//商品列表的名称
 		try{
 			initWebDriver();
 			topWords=new HashSet<String>();
