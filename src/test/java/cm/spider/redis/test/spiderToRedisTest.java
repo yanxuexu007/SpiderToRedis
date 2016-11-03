@@ -1,11 +1,11 @@
 package cm.spider.redis.test;
 
-import java.util.List;
-
-import org.apache.commons.codec.binary.Base64;
+//import java.util.List;
+//
+//import org.apache.commons.codec.binary.Base64;
 import org.apache.log4j.Logger;
-import org.apdplat.word.WordSegmenter;
-import org.apdplat.word.segmentation.Word;
+//import org.apdplat.word.WordSegmenter;
+//import org.apdplat.word.segmentation.Word;
 
 public class spiderToRedisTest {
 	public static Logger logger=Logger.getLogger(spiderToRedisTest.class);
