@@ -83,14 +83,14 @@ public class ChineseWordsJingDongCrawl {
 	        	}
 			}
 		}catch(Exception ex){
-			logger.info(" getTBTodayRankingList crashes :"+ex.getMessage());
+			logger.info(" getJDTodayRankingListWords crashes :"+ex.getMessage());
 			topWords=null;
 		}finally {
 			//释放内存
 			closeWebDriver();
 			childelement=null;		//存放子节点对象
 			crawltags=null;			//div中涉及需要抓取的元素集合
-			hotZh=null;				//热搜词类别对应的url
+			hotZh=null;				//商品列表的名称
 		}
 		return topWords;
 	}

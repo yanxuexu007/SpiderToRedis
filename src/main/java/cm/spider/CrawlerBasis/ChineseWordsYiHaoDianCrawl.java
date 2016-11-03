@@ -137,7 +137,7 @@ public class ChineseWordsYiHaoDianCrawl {
 			childelement=null;		//存放子节点对象
 			crawltags=null;			//div中涉及需要抓取的元素集合
 			hotZh=null;				//热搜商品
-			page_xpath=null;						//页面上检索对应的xpath
+			page_xpath=null;		//页面上检索对应的xpath
 		}
 		return topWords;
 	}

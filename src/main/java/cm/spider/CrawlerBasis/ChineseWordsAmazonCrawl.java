@@ -52,11 +52,12 @@ public class ChineseWordsAmazonCrawl {
 	 * @return 热搜商品列表
 	 */
 	/**
-	 * 今日关注完整榜单链接获取的页面为https://www.amazon.cn/gp/bestsellers/，https://www.amazon.cn/gp/site-directory/ref=nav_shopall_btn
+	 * 今日关注完整榜单链接获取的页面为
+	 * https://www.amazon.cn/gp/bestsellers/，
+	 * https://www.amazon.cn/gp/site-directory/ref=nav_shopall_btn
 	 * 
 	 * 对应热词可以通过页面元素分析，直接Copy Xpath获得：
 	 * 榜单热搜词Xpath：//*[@id="siteDirectory"]/div/div/div[2]/div/div/div/div/ul/li/span/span/a
-	 * 
 	 * ......
 	 */
 	public Set<String> getAmazonHourWords(String href){
@@ -79,9 +80,7 @@ public class ChineseWordsAmazonCrawl {
 	        			childelement=(crawltags.get(i));
 	        			if(childelement!=null){
 	        				hotZh=childelement.getText();
-	        				if(hotZh!=null&&hotZh.length()>1){
-	        					topWords.add(hotZh.trim());
-	        				}
+	        				if(hotZh!=null&&hotZh.length()>1)topWords.add(hotZh.trim());
 	        			}
 		        	}
 	        	}
@@ -94,7 +93,7 @@ public class ChineseWordsAmazonCrawl {
 			closeWebDriver();
 			childelement=null;		//存放子节点对象
 			crawltags=null;			//div中涉及需要抓取的元素集合
-			hotZh=null;				//热搜词类别对应的url
+			hotZh=null;				//商品列表的名称
 		}
 		return topWords;
 	}

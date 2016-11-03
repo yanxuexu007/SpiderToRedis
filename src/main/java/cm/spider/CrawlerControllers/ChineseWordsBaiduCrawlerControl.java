@@ -18,7 +18,7 @@ public class ChineseWordsBaiduCrawlerControl {
 	public static Logger logger=Logger.getLogger(ChineseWordsBaiduCrawlerControl.class);
 	
 	public static void main(String[] args) throws Exception {
-		//测试从后台获取关键词,20161031,ok
+		//测试从后台获取百度热门搜索关键词,20161031,ok
 		Map<String, String> topIndexList=null;
 		Map<String,  Set<String>> typesTopZhWords=null;
 		Set<String> hotZhWords=null;
