@@ -48,13 +48,15 @@ public class ChineseWordsAmazonCrawl {
 	/**
 	 * 根据排行榜首页url，获取今日关注的完整榜单热搜词l信息
 	 * 使用的操作类是Selenium，它的基本原理是模拟浏览器获取文档页面，元素标签等对应的信息，并提供api进行属性获取，适合于快速开发自定义爬虫的工具
-	 * @param href 种子首页路径https://www.amazon.cn/gp/bestsellers/
+	 * @param href 种子首页路径https://www.amazon.cn/gp/site-directory/ref=nav_shopall_btn
 	 * @return 热搜商品列表
 	 */
 	/**
-	 * 今日关注完整榜单链接获取的页面为https://www.amazon.cn/gp/bestsellers/，
+	 * 今日关注完整榜单链接获取的页面为https://www.amazon.cn/gp/bestsellers/，https://www.amazon.cn/gp/site-directory/ref=nav_shopall_btn
+	 * 
 	 * 对应热词可以通过页面元素分析，直接Copy Xpath获得：
-	 * 榜单热搜词Xpath：//*[@id="zg_left_col1"]/div/div/div[2]/a/img
+	 * 榜单热搜词Xpath：//*[@id="siteDirectory"]/div/div/div[2]/div/div/div/div/ul/li/span/span/a
+	 * 
 	 * ......
 	 */
 	public Set<String> getAmazonHourWords(String href){
@@ -66,17 +68,17 @@ public class ChineseWordsAmazonCrawl {
 			initWebDriver();
 			topWords=new HashSet<String>();
 			if(href!=null&&URLFILTER.matcher(href).matches()){
-		        //获取首页页面
+		        //获取首页页面s
 		        webDriver.get(href);
 		        
 		        //亚马逊排行首页页面规律分析，详见本方法中有关页面的注释说明，以下代码针对页面分析之后做的开发，页面发生变化，则代码需要修改
 		        //20161031深度定制爬虫逻辑如下：
-		        crawltags=webDriver.findElements(By.xpath("//*[@id=\"zg_left_col1\"]/div/div/div[2]/a/img")); //获取热搜产品
+		        crawltags=webDriver.findElements(By.xpath("//*[@id=\"siteDirectory\"]/div/div/div[2]/div/div/div/div/ul/li/span/span/a")); //获取热搜产品
 		        if(crawltags!=null&&crawltags.size()>0){
 	        		for(int i=0;i<crawltags.size();i++){
 	        			childelement=(crawltags.get(i));
 	        			if(childelement!=null){
-	        				hotZh=childelement.getAttribute("alt");
+	        				hotZh=childelement.getText();
 	        				if(hotZh!=null&&hotZh.length()>1){
 	        					topWords.add(hotZh.trim());
 	        				}

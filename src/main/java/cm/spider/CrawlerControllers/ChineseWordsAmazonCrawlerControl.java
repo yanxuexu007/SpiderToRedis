@@ -16,7 +16,7 @@ public class ChineseWordsAmazonCrawlerControl {
 		Set<String> topIndexList=null;
 		ChineseWordsAmazonCrawl amazonCrawler=new ChineseWordsAmazonCrawl();
 		int recnum=0;
-		topIndexList=amazonCrawler.getAmazonHourWords("https://www.amazon.cn/gp/bestsellers/"); //种子文件起始地址
+		topIndexList=amazonCrawler.getAmazonHourWords("https://www.amazon.cn/gp/site-directory/ref=nav_shopall_btn"); //种子文件起始地址
 		
 		//测试获取搜索词列表的代码段
 		if(topIndexList!=null&&topIndexList.size()>0){

@@ -15,7 +15,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import cm.redis.Commons.ResourcesConfig;
 
 /**
-* 20161031 由于京东页面同样涉及比较复杂的js生成，使用已有的Selenium方法，对淘宝的今日关注上升排行榜进行爬虫
+* 20161031 使用已有的Selenium方法，对苏宁易购排行榜进行爬虫
 * @author chinamobile
 */
 public class ChineseWordsSuNingYiGouCrawl {
@@ -101,7 +101,7 @@ public class ChineseWordsSuNingYiGouCrawl {
 			closeWebDriver();
 			childelement=null;		//存放子节点对象
 			crawltags=null;			//div中涉及需要抓取的元素集合
-			hotZh=null;				//热搜词类别对应的url
+			hotZh=null;				//热搜词
 		}
 		return topWords;
 	}

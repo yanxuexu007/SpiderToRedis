@@ -61,8 +61,8 @@ public class ChineseWordsTaobaoCrawl {
 		Set<String> topPagesAndLinks=null;
 		List<WebElement> crawltags=null;		//页面中涉及需要抓取的元素文档对象集合
 		WebElement childelement=null;			//页面中对应的元素
-		String hotUrl=null;							//商品列表的页面url
-		int pos=0;										//截取url字段位置标识
+		String hotUrl=null;								//商品列表的页面url
+		int pos=0;											//截取url字段位置标识
 		try{
 			initWebDriver();
 			topPagesAndLinks=new HashSet<String>();
@@ -133,7 +133,7 @@ public class ChineseWordsTaobaoCrawl {
 	public Set<String> getTBHotProductsDetail(Set<String> topPagesAndLinks){
 		if(topPagesAndLinks==null||topPagesAndLinks.size()<=0)return null;
 		Set<String> hotProductsWords=null;
-		String hotUrl=null;						//商品列表对应的页面url
+		String hotUrl=null;							//商品列表对应的页面url
 		List<WebElement> crawltags=null;	//页面中涉及需要抓取的元素文档对象集合
 		String ZhWord=null;						//标签中的热词
 		try{
@@ -165,7 +165,7 @@ public class ChineseWordsTaobaoCrawl {
 			closeWebDriver();
 			hotUrl=null;					//商品列表对应的页面url
 			crawltags=null;				//页面中涉及需要抓取的元素文档对象集合
-			ZhWord=null;					//标签中的热词
+			ZhWord=null;				//标签中的热词
 		}
 		return hotProductsWords;
 	} 

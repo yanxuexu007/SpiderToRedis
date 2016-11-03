@@ -15,7 +15,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import cm.redis.Commons.ResourcesConfig;
 
 /**
-* 20161031 由于京东页面同样涉及比较复杂的js生成，使用已有的Selenium方法，对淘宝的今日关注上升排行榜进行爬虫
+* 20161031 由于京东页面同样涉及比较复杂的js生成，使用已有的Selenium方法，京东页面排行榜进行爬虫
 * @author chinamobile
 */
 public class ChineseWordsJingDongCrawl {

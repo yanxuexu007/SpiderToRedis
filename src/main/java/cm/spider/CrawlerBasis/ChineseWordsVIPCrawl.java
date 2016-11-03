@@ -101,7 +101,7 @@ public class ChineseWordsVIPCrawl {
 			closeWebDriver();
 			childelement=null;		//存放子节点对象
 			crawltags=null;			//div中涉及需要抓取的元素集合
-			hotZh=null;				//热搜词类别对应的url
+			hotZh=null;				//商品列表的名称
 		}
 		return topWords;
 	}
