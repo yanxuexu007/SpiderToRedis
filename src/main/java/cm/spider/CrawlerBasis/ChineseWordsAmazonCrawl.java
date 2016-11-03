@@ -58,9 +58,10 @@ public class ChineseWordsAmazonCrawl {
 	 * 
 	 * 对应热词可以通过页面元素分析，直接Copy Xpath获得：
 	 * 榜单热搜词Xpath：//*[@id="siteDirectory"]/div/div/div[2]/div/div/div/div/ul/li/span/span/a
+	 * 不同的页面，对Xpath的需求是不同的，解析方式也不同，标签解析属性，或者text，需求是不同的
 	 * ......
 	 */
-	public Set<String> getAmazonHourWords(String href){
+	public Set<String> getAmazonHotWords(String href){
 		Set<String> topWords=null;
 		List<WebElement> crawltags=null;		//页面中涉及需要抓取的元素文档对象集合
 		WebElement childelement=null;			//页面中对应的元素
@@ -86,7 +87,7 @@ public class ChineseWordsAmazonCrawl {
 	        	}
 			}
 		}catch(Exception ex){
-			logger.info(" getAmazonHourWords crashes :"+ex.getMessage());
+			logger.info(" getAmazonHotWords crashes :"+ex.getMessage());
 			topWords=null;
 		}finally {
 			//释放内存

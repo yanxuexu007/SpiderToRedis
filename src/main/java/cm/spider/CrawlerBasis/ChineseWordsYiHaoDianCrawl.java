@@ -99,7 +99,7 @@ public class ChineseWordsYiHaoDianCrawl {
 	 * 									 //*[@id="main"]/div/ul[3]/li/a
 	 * ......
 	 */
-	public Set<String> getYiHaoDianHotSearchWords(Set<String> hrefs){
+	public Set<String> getYiHaoDianHotWords(Set<String> hrefs){
 		if(hrefs==null||hrefs.size()<=0)return null;
 		Set<String> topWords=null;
 		List<WebElement> crawltags=null;		//页面中涉及需要抓取的元素文档对象集合

@@ -109,7 +109,7 @@ public class ChineseWordsBaiduCrawl  {
 			childelement=null;		//存放子节点对象
 			crawltags=null;			//div中涉及需要抓取的元素集合
 			hotUrl=null;				//热搜词类别对应的url
-			hotZh=null;   			//热搜词类别
+			hotZh=null;   				//热搜词类别
 			pos=0;						//截取url字段位置标识
 		}
 		return allTypesAndLinks;

@@ -4,7 +4,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-
 import cm.spider.CrawlerBasis.ChineseWordsBaiduCrawl;
 
 
@@ -16,6 +15,24 @@ import cm.spider.CrawlerBasis.ChineseWordsBaiduCrawl;
 public class ChineseWordsBaiduCrawlerControl {
 	//用于日志的获取
 	public static Logger logger=Logger.getLogger(ChineseWordsBaiduCrawlerControl.class);
+	
+	/**
+	 * 封装获取百度各类热搜词方法
+	 * 对应的种子页面是：http://top.baidu.com/boards?fr=topindex
+	 * @return 截获到的类别，关键字列表组成的集合
+	 */
+	public Map<String,  Set<String>> getBaiduHotSearchWords(){
+		Map<String, String> topIndexList=null;
+		Map<String,  Set<String>> typesTopZhWords=null;
+		ChineseWordsBaiduCrawl baiduCrawler=new ChineseWordsBaiduCrawl();
+		try{
+			topIndexList=baiduCrawler.getBDHotZhTypesAndLinks("http://top.baidu.com/boards?fr=topindex"); //种子文件起始地址
+			typesTopZhWords=baiduCrawler.getBDHotZhDetail(topIndexList);
+		}catch(Exception ex){
+			logger.info(" getBaiduHotSearchWords crashes :"+ex.getMessage());
+		}
+		return typesTopZhWords;
+	}
 	
 	public static void main(String[] args) throws Exception {
 		//测试从后台获取百度热门搜索关键词,20161031,ok

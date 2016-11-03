@@ -57,7 +57,7 @@ public class ChineseWordsJingDongCrawl {
 	 * 今日关注完整榜单Xpath：//*[@id="topSearchListcate9999_1DAY"]/li/div[1]/a/div[1]/div/p[1]
 	 * ......
 	 */
-	public Set<String> getJDTodayRankingListWords(String href){
+	public Set<String> getJingDongHotWords(String href){
 		Set<String> topWords=null;
 		List<WebElement> crawltags=null;		//页面中涉及需要抓取的元素文档对象集合
 		WebElement childelement=null;			//页面中对应的元素
@@ -83,7 +83,7 @@ public class ChineseWordsJingDongCrawl {
 	        	}
 			}
 		}catch(Exception ex){
-			logger.info(" getJDTodayRankingListWords crashes :"+ex.getMessage());
+			logger.info(" getJingDongHotWords crashes :"+ex.getMessage());
 			topWords=null;
 		}finally {
 			//释放内存

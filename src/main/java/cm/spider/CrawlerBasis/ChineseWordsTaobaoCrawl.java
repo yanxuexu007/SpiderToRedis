@@ -130,7 +130,7 @@ public class ChineseWordsTaobaoCrawl {
 	 * 对应页面的Xpath：//*[@id="bang-wbang"]/div/div/div/ul/li/div/div[2]/div/a
 	 *  ......
 	 */
-	public Set<String> getTBHotProductsDetail(Set<String> topPagesAndLinks){
+	public Set<String> getTaoBaoHotWords(Set<String> topPagesAndLinks){
 		if(topPagesAndLinks==null||topPagesAndLinks.size()<=0)return null;
 		Set<String> hotProductsWords=null;
 		String hotUrl=null;							//商品列表对应的页面url
@@ -158,7 +158,7 @@ public class ChineseWordsTaobaoCrawl {
 	        	}
 	        }
 		}catch(Exception ex){
-			logger.info(" getTBHotProductsDetail crashes :"+ex.getMessage());
+			logger.info(" getTaoBaoHotWords crashes :"+ex.getMessage());
 			hotProductsWords= null;
 		}finally {
 			//释放内存

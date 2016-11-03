@@ -58,7 +58,7 @@ public class ChineseWordsVIPCrawl {
 	 * 	榜单热搜词Xpath：//*[@id="floorList"]/div/div[2]/div[1]/div/div/div[2]/div/a
 	 * ......
 	 */
-	public Set<String> getVIPHotProductWords(String href){
+	public Set<String> getVIPHotWords(String href){
 		Set<String> topWords=null;
 		List<WebElement> crawltags=null;		//页面中涉及需要抓取的元素文档对象集合
 		WebElement childelement=null;			//页面中对应的元素
@@ -94,7 +94,7 @@ public class ChineseWordsVIPCrawl {
 		        }
 			}
 		}catch(Exception ex){
-			logger.info(" getVIPHotProductWords crashes :"+ex.getMessage());
+			logger.info(" getVIPHotWords crashes :"+ex.getMessage());
 			topWords=null;
 		}finally {
 			//释放内存

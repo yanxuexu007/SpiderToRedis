@@ -58,7 +58,7 @@ public class ChineseWordsSuNingYiGouCrawl {
 	 * 					 //*[@id="searchUpModule"]/ul/li/div[2]/a
 	 * ......
 	 */
-	public Set<String> getSNYGTodayRankingListWords(String href){
+	public Set<String> getSNYGHotWords(String href){
 		Set<String> topWords=null;
 		List<WebElement> crawltags=null;		//页面中涉及需要抓取的元素文档对象集合
 		WebElement childelement=null;			//页面中对应的元素
@@ -94,7 +94,7 @@ public class ChineseWordsSuNingYiGouCrawl {
 	        	}
 			}
 		}catch(Exception ex){
-			logger.info(" getSNYGTodayRankingListWords crashes :"+ex.getMessage());
+			logger.info(" getSNYGHotWords crashes :"+ex.getMessage());
 			topWords=null;
 		}finally {
 			//释放内存
