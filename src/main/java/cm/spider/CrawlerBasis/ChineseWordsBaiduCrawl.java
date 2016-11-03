@@ -1,4 +1,4 @@
-package cm.crawler.commons;
+package cm.spider.CrawlerBasis;
 
 import java.util.List;
 import java.util.HashMap;
@@ -14,7 +14,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import cm.redis.commons.ResourcesConfig;
+import cm.redis.Commons.ResourcesConfig;
 
 /**
 * 20161028 使用已有的Selenium方法，对百度带有固定域名前缀的网页进行中文热词的抓取，百度网页较为简单的html静态页，直接htmlunit解析也可以

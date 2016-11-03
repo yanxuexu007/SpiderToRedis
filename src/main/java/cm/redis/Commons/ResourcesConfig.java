@@ -1,4 +1,4 @@
-package cm.redis.commons;
+package cm.redis.Commons;
 
 /**
  * 接口配置类，用于记录portal接口、短信接口的注册信息

@@ -1,16 +1,15 @@
-package cm.crawler.controllers;
+package cm.spider.CrawlerControllers;
 
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-//import org.apache.commons.codec.binary.Base64;
-import cm.crawler.commons.ChineseWordsVIPCrawl;
+import cm.spider.CrawlerBasis.ChineseWordsVIPCrawl;
 
 
-public class ChineseWordsVIPController {
+public class ChineseWordsVIPCrawlerControl {
 	//用于日志的获取
-	public static Logger logger=Logger.getLogger(ChineseWordsVIPController.class);
+	public static Logger logger=Logger.getLogger(ChineseWordsVIPCrawlerControl.class);
 	
 	public static void main(String[] args) throws Exception {
 		//测试从后台获取唯品会的今日热门关注商品列表,20161031,ok

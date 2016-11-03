@@ -1,12 +1,11 @@
-package cm.crawler.controllers;
+package cm.spider.CrawlerControllers;
 
 import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-//import org.apache.commons.codec.binary.Base64;
-import cm.crawler.commons.ChineseWordsBaiduCrawl;
+import cm.spider.CrawlerBasis.ChineseWordsBaiduCrawl;
 
 
 /**
@@ -14,9 +13,9 @@ import cm.crawler.commons.ChineseWordsBaiduCrawl;
  * 时间2016年10月30日，后续业务可能会随着页面做进一步更新
  * @author chinamobile
  */
-public class ChineseWordsBaiduController {
+public class ChineseWordsBaiduCrawlerControl {
 	//用于日志的获取
-	public static Logger logger=Logger.getLogger(ChineseWordsBaiduController.class);
+	public static Logger logger=Logger.getLogger(ChineseWordsBaiduCrawlerControl.class);
 	
 	public static void main(String[] args) throws Exception {
 		//测试从后台获取关键词,20161031,ok

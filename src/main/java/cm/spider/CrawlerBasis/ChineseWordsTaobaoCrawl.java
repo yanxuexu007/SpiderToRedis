@@ -1,4 +1,4 @@
-package cm.crawler.commons;
+package cm.spider.CrawlerBasis;
 
 import java.util.HashSet;
 import java.util.List;
@@ -12,7 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import cm.redis.commons.ResourcesConfig;
+import cm.redis.Commons.ResourcesConfig;
 
 /**
 * 20161031 由于淘宝页面涉及比较复杂的js生成，使用已有的Selenium方法，对淘宝的今日关注上升排行榜进行爬虫

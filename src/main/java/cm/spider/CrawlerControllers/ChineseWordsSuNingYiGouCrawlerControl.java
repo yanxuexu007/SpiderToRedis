@@ -1,16 +1,15 @@
-package cm.crawler.controllers;
+package cm.spider.CrawlerControllers;
 
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-//import org.apache.commons.codec.binary.Base64;
-import cm.crawler.commons.ChineseWordsSuNingYiGouCrawl;
+import cm.spider.CrawlerBasis.ChineseWordsSuNingYiGouCrawl;
 
 
-public class ChineseWordsSuNingYiGouController {
+public class ChineseWordsSuNingYiGouCrawlerControl {
 	//用于日志的获取
-	public static Logger logger=Logger.getLogger(ChineseWordsSuNingYiGouController.class);
+	public static Logger logger=Logger.getLogger(ChineseWordsSuNingYiGouCrawlerControl.class);
 	
 	public static void main(String[] args) throws Exception {
 		//测试从后台获取苏宁易购的今日热门关注商品,20161031,ok

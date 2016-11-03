@@ -1,4 +1,4 @@
-package cm.redis.commons;
+package cm.redis.Commons;
 
 import java.util.HashSet;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.TreeSet;
 
 import org.apache.log4j.Logger;
 
-import cm.redis.commons.ResourcesConfig;
+import cm.redis.Commons.ResourcesConfig;
 import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisCluster;

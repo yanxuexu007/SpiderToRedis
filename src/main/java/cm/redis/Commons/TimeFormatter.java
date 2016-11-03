@@ -1,4 +1,4 @@
-package cm.redis.commons;
+package cm.redis.Commons;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;

@@ -1,16 +1,15 @@
-package cm.crawler.controllers;
+package cm.spider.CrawlerControllers;
 
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-//import org.apache.commons.codec.binary.Base64;
-import cm.crawler.commons.ChineseWordsJingDongCrawl;
+import cm.spider.CrawlerBasis.ChineseWordsJingDongCrawl;
 
 
-public class ChineseWordsJingDongController {
+public class ChineseWordsJingDongCrawlerControl {
 	//用于日志的获取
-	public static Logger logger=Logger.getLogger(ChineseWordsJingDongController.class);
+	public static Logger logger=Logger.getLogger(ChineseWordsJingDongCrawlerControl.class);
 	
 	public static void main(String[] args) throws Exception {
 		//测试从后台获取京东的今日热门关注商品,20161031,ok

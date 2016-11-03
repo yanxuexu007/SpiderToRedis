@@ -1,16 +1,15 @@
-package cm.crawler.controllers;
+package cm.spider.CrawlerControllers;
 
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-//import org.apache.commons.codec.binary.Base64;
-import cm.crawler.commons.ChineseWordsAmazonCrawl;
+import cm.spider.CrawlerBasis.ChineseWordsAmazonCrawl;
 
 
-public class ChineseWordsAmazonController {
+public class ChineseWordsAmazonCrawlerControl {
 	//用于日志的获取
-	public static Logger logger=Logger.getLogger(ChineseWordsAmazonController.class);
+	public static Logger logger=Logger.getLogger(ChineseWordsAmazonCrawlerControl.class);
 	
 	public static void main(String[] args) throws Exception {
 		//测试从后台获取亚马逊的今日热门关注商品,20161031,ok
@@ -18,6 +17,7 @@ public class ChineseWordsAmazonController {
 		ChineseWordsAmazonCrawl amazonCrawler=new ChineseWordsAmazonCrawl();
 		int recnum=0;
 		topIndexList=amazonCrawler.getAmazonHourWords("https://www.amazon.cn/gp/bestsellers/"); //种子文件起始地址
+		
 		//测试获取搜索词列表的代码段
 		if(topIndexList!=null&&topIndexList.size()>0){
 			for(String url : topIndexList){
