@@ -5,7 +5,6 @@ import java.util.TreeSet;
 
 import org.apache.log4j.Logger;
 import cm.spider.CrawlerBasis.ChineseWordsBaiduCrawl;
-import cm.spider.CrawlerBasis.ChineseWordsJingDongCrawl;
 
 
 /**
