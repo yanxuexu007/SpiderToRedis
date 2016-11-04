@@ -27,9 +27,11 @@ public class ResourcesConfig {
 	public final static String REDIS_SERVER_IP="10.245.254.56";		//redis合库后的数据库IP地址
 	public final static int REDIS_SERVER_PORT=7002;					    //redis合库后的数据库端口
 	
-	//爬虫浏览器驱动信息配置
+	//爬虫浏览器驱动信息配置,windows
 	public final static String BROWSER_DRIVER_NAME="webdriver.chrome.driver";
 	public final static String BROWSER_DRIVER_POSITION="C:\\Program Files\\Google\\Driver\\chromedriver.exe";
 	
-	
+	//爬虫浏览器驱动信息配置,Linux
+//	public final static String BROWSER_DRIVER_NAME="webdriver.chrome.driver";
+//	public final static String BROWSER_DRIVER_POSITION="/home/storm/netantdata/node_modules/chromedriver/bin/chromedriver";
 }
