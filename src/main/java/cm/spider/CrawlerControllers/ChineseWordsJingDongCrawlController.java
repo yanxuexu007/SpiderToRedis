@@ -33,7 +33,7 @@ public class ChineseWordsJingDongCrawlController {
 	
 	/**
 	 * 封装获取京东热搜商品方法
-	 * 对应的种子页面是：ttps://top.jd.com/#search
+	 * 对应的种子页面是：https://top.jd.com/#search
 	 * @return 截获到的关键字
 	 */
 	public TreeSet<String> getJingDongHotSearchWords(){

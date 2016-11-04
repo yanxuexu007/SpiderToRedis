@@ -81,7 +81,7 @@ public class ChineseWordsBaiduCrawl  {
 	        				//截取中文大类别
 		        			hotZh=childelement.getText();
 		        			if(hotZh!=null){
-		        				hotZh=hotZh.replaceAll("[\\s\b\r\n\t]*", "");//去除多余的空格
+		        				hotZh=hotZh.replaceAll("[\\s\b\r\f\n\t]*", "");//去除多余的空格
 		        				//hotZh=Base64.encodeBase64URLSafeString(hotZh.getBytes("UTF-8"));//转换为BASE64增强型编码
 		        			}
 		        			//截取中文大类别对应的url

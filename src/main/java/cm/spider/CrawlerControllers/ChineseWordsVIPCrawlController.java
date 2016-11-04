@@ -30,7 +30,7 @@ public class ChineseWordsVIPCrawlController {
 	
 	/**
 	 * 封装获取唯品会热搜商品方法
-	 * 对应的种子页面是：http://rec.suning.com/show/rank.htm
+	 * 对应的种子页面是：http://category.vip.com/
 	 * @return 截获到的关键字
 	 */
 	public TreeSet<String> getVIPHotSearchWords(){

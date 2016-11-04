@@ -107,9 +107,8 @@ public class CollectEBHotWordsToRedis {
 		for(String str: ebwords){
 			String [] tmp=null;
 			words=null;
+			str = str.replaceAll("[\\s\b\r\n\f\t]*", "");
 			if(str.contains("/"))tmp=str.split("/");
-			else if(str.contains("\t"))tmp=str.split("\t");
-			else if(str.contains(" "))tmp=str.split(" ");
 			if(tmp!=null){
 				for(int i=0;i<tmp.length;i++)
 				{
