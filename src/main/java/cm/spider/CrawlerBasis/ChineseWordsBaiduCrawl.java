@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
@@ -126,20 +127,20 @@ public class ChineseWordsBaiduCrawl  {
 	 * 分析页面获取的Xpath为//*[@id="main"]/div/div[2]/div/div/div/ul/li/div[1]/a[1]
 	 * 
 	 */
-	public Map<String, Set<String>> getBDHotZhDetail(Map<String, String> ZhTypesLinks){
+	public Map<String, TreeSet<String>> getBDHotZhDetail(Map<String, String> ZhTypesLinks){
 		if(ZhTypesLinks==null||ZhTypesLinks.size()<=0)return null;
-		Map<String,  Set<String>> tYpeAndZhWords=null;
+		Map<String,  TreeSet<String>> tYpeAndZhWords=null;
 		List<WebElement> crawltags=null;	//页面中涉及需要抓取的元素文档对象集合
 		String hotZh=null;   						//热搜词顶级类别
-		String hotUrl=null;						//热搜类别对应的页面url
+		String hotUrl=null;							//热搜类别对应的页面url
 		String ZhWord=null;						//标签中的热词
-		Set<String> ZhWords=null;			//热搜词集合，无重复
+		TreeSet<String> ZhWords=null;			//热搜词集合，无重复
 		try{
-			tYpeAndZhWords=new HashMap<String,  Set<String>>();
+			tYpeAndZhWords=new HashMap<String,  TreeSet<String>>();
 			initWebDriver();
 	        for (String key : ZhTypesLinks.keySet()){
 	        	hotZh=key;
-	        	ZhWords=new HashSet<String>();
+	        	ZhWords=new TreeSet<String>();
 	        	//获取关键词对应的url
 	        	hotUrl= ZhTypesLinks.get(key);  
 	        	//获取url下载到的页面

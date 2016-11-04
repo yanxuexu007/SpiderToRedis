@@ -1,8 +1,7 @@
 package cm.spider.CrawlerBasis;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
@@ -61,14 +60,14 @@ public class ChineseWordsAmazonCrawl {
 	 * 不同的页面，对Xpath的需求是不同的，解析方式也不同，标签解析属性，或者text，需求是不同的
 	 * ......
 	 */
-	public Set<String> getAmazonHotWords(String href){
-		Set<String> topWords=null;
+	public TreeSet<String> getAmazonHotWords(String href){
+		TreeSet<String> topWords=null;
 		List<WebElement> crawltags=null;		//页面中涉及需要抓取的元素文档对象集合
 		WebElement childelement=null;			//页面中对应的元素
 		String hotZh=null;								//商品列表的名称
 		try{
 			initWebDriver();
-			topWords=new HashSet<String>();
+			topWords=new TreeSet<String>();
 			if(href!=null&&URLFILTER.matcher(href).matches()){
 		        //获取首页页面s
 		        webDriver.get(href);

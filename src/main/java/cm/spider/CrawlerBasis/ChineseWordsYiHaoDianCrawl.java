@@ -3,6 +3,7 @@ package cm.spider.CrawlerBasis;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
@@ -99,16 +100,16 @@ public class ChineseWordsYiHaoDianCrawl {
 	 * 									 //*[@id="main"]/div/ul[3]/li/a
 	 * ......
 	 */
-	public Set<String> getYiHaoDianHotWords(Set<String> hrefs){
+	public TreeSet<String> getYiHaoDianHotWords(Set<String> hrefs){
 		if(hrefs==null||hrefs.size()<=0)return null;
-		Set<String> topWords=null;
+		TreeSet<String> topWords=null;
 		List<WebElement> crawltags=null;		//页面中涉及需要抓取的元素文档对象集合
 		WebElement childelement=null;			//页面中对应的元素
 		String hotZh=null;								//热搜商品
 		String page_xpath=null;						//页面上检索对应的xpath
 		try{
 			initWebDriver();
-			topWords=new HashSet<String>();
+			topWords=new TreeSet<String>();
 			for(String href: hrefs){
 				if(href.equals("http://www.yhd.com/hotq/")==true)page_xpath="//*[@id=\"main\"]/div/ul[3]/li/ul/li/a";
 				else page_xpath="//*[@id=\"main\"]/div/ul[3]/li/a";

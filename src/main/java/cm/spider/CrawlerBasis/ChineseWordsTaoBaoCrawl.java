@@ -3,6 +3,7 @@ package cm.spider.CrawlerBasis;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
@@ -18,9 +19,9 @@ import cm.redis.Commons.ResourcesConfig;
 * 20161031 由于淘宝页面涉及比较复杂的js生成，使用已有的Selenium方法，对淘宝的今日关注上升排行榜进行爬虫
 * @author chinamobile
 */
-public class ChineseWordsTaobaoCrawl {
+public class ChineseWordsTaoBaoCrawl {
 	//日志记录
-	public static Logger logger=Logger.getLogger(ChineseWordsTaobaoCrawl.class);
+	public static Logger logger=Logger.getLogger(ChineseWordsTaoBaoCrawl.class);
 	//http和https的正则表达式
 	private final static Pattern URLFILTER=Pattern.compile("(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]");
 	//模拟浏览器客户端变量
@@ -130,15 +131,15 @@ public class ChineseWordsTaobaoCrawl {
 	 * 对应页面的Xpath：//*[@id="bang-wbang"]/div/div/div/ul/li/div/div[2]/div/a
 	 *  ......
 	 */
-	public Set<String> getTaoBaoHotWords(Set<String> topPagesAndLinks){
+	public TreeSet<String> getTaoBaoHotWords(Set<String> topPagesAndLinks){
 		if(topPagesAndLinks==null||topPagesAndLinks.size()<=0)return null;
-		Set<String> hotProductsWords=null;
+		TreeSet<String> hotProductsWords=null;
 		String hotUrl=null;							//商品列表对应的页面url
 		List<WebElement> crawltags=null;	//页面中涉及需要抓取的元素文档对象集合
 		String ZhWord=null;						//标签中的热词
 		try{
 			initWebDriver();
-			hotProductsWords=new HashSet<String>();
+			hotProductsWords=new TreeSet<String>();
 	        for (String url : topPagesAndLinks){
 	        	hotUrl=url;
 	        	//获取url下载到的页面
