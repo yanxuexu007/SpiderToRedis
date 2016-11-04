@@ -23,7 +23,7 @@ import redis.clients.jedis.SortingParams;
  * @author nicolashsu
  *
  */
-public class RedisServer {
+public class RedisClusterObj {
 	//构建集群连接对象实例
 	private static JedisCluster jedisCluster;
 	
@@ -31,17 +31,17 @@ public class RedisServer {
 	private static Map<String, JedisPool> clusterNodes;  
 	
 	//单例模式实现客户端管理类
-	private static RedisServer INSTANCE=new RedisServer();
+	private static RedisClusterObj INSTANCE=new RedisClusterObj();
 
-	public static Logger logger=Logger.getLogger(RedisServer.class);
+	public static Logger logger=Logger.getLogger(RedisClusterObj.class);
 	
 	//初始化构造函数
-	private RedisServer()
+	private RedisClusterObj()
 	{
 		Set<HostAndPort> jedisClusterNodes = new HashSet<HostAndPort>();
 		//只需要配置集群中的一个结点，连接成功后，自动获取点集群中其他结点信息
-		jedisClusterNodes.add(new HostAndPort(ResourcesConfig.REDIS_SERVER_IP, 
-				Integer.valueOf(ResourcesConfig.REDIS_SERVER_PORT)));
+		jedisClusterNodes.add(new HostAndPort(ResourcesConfig.REDIS_CLUSTER_IP, 
+				ResourcesConfig.REDIS_CLUSTER_PORT));
 		
 		//构建Cluster的连接池配置参数
 //		JedisPoolConfig config = new JedisPoolConfig();
@@ -66,11 +66,11 @@ public class RedisServer {
 	 * 获取缓存管理器唯一实例
 	 * @return
 	 */
-	public static RedisServer getInstance() {
+	public static RedisClusterObj getInstance() {
 		if(INSTANCE==null){
-			synchronized (RedisServer.class) {
+			synchronized (RedisClusterObj.class) {
 				if(INSTANCE==null){
-					INSTANCE=new RedisServer();
+					INSTANCE=new RedisClusterObj();
 				}
 			}
 		}

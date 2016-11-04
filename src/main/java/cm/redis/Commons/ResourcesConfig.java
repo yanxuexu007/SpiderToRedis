@@ -16,16 +16,16 @@ public class ResourcesConfig {
 	public final static int MIN_IDLE = 5;			 									//控制一个pool最少有多少个状态为idle(空闲的)的jedis实例，默认值是0。空闲代表可以复用。
 	public final static int MAX_WAIT =-1;  											//等待可用连接的最大时间，单位毫秒，默认值为-1，表示等待永不超时。如果超过等待时间，则直接抛出JedisConnectionException；
 	public final static boolean TEST_ON_BORROW = true;					//在borrow一个jedis实例时，是否提前进行validate操作；如果为true，则得到的jedis实例均是可用的；
+	public final static int TIMEOUT=100*1000;									//获取jedis单例返回信息的超时时间
 	
-	public final static int CLUSTER_TIMEOUT=60*1000;						//获取集群信息的超时时间
+	public final static int CLUSTER_TIMEOUT=60*1000;						//获取集群连接的超时时间
 	public final static int CLUSTER_MAX_REDIRECTIONS=15; 			//获取重定向的次数
 	
-	public final static String REDIS_SERVER_IP="10.245.254.59";		//redis数据库IP地址
-	public final static String REDIS_SERVER_PORT="7000";				//redis数据库端口
+	public final static String REDIS_CLUSTER_IP="10.245.254.59";		//redis cluster数据库IP地址
+	public final static int REDIS_CLUSTER_PORT=7000;						//redis cluster数据库端口
 	
-	// 存放网页的位置
-	//public final static String WEBPAGE_SERVER="/home/storm/netantdata/crawlers/";  //正式服务器地址
-	//public final static String WEBPAGE_SERVER="E:/";  						//测试地址	
+	public final static String REDIS_SERVER_IP="10.245.254.56";		//redis合库后的数据库IP地址
+	public final static int REDIS_SERVER_PORT=7002;					    //redis合库后的数据库端口
 	
 	//爬虫浏览器驱动信息配置
 	public final static String BROWSER_DRIVER_NAME="webdriver.chrome.driver";
