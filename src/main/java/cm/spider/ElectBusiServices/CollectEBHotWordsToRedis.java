@@ -37,25 +37,43 @@ public class CollectEBHotWordsToRedis {
 	public static Logger logger=Logger.getLogger(CollectEBHotWordsToRedis.class);
 	
 	public static void main(String[] args) {
-		//主方法
-		String prehour=null;
-		String curhour=null;
+		//主方法测试ok
+//		String prehour=null;
+//		String curhour=null;
+//		TreeSet<String> collectwords=null;
+//		CollectEBHotWordsToRedis collectEBHotWordsToRedis=new CollectEBHotWordsToRedis();
+//		while(true){
+//			curhour=TimeFormatter.getHour();		
+//			if(curhour.equals(prehour)==false){
+//				collectwords=collectEBHotWordsToRedis.collectAllEletronicBusinessHotWords();
+//				prehour=curhour;
+//			}
+//			if(collectwords!=null&&collectwords.size()>0){
+//				collectEBHotWordsToRedis.setEBHotWordsToRedis(collectwords); //每10分钟更新
+//			}
+//			try{					
+//				Thread.sleep(1000*60*10);//休息10分钟
+//			}catch(Exception ex){
+//				logger.info(" Thread CollectEBHotWordsToRedis crashes: "+ex.getMessage());
+//			}
+//		}
+	}
+	
+	/**
+	 * 提供给外部调用的 电商热词动态更新与统计搜索指数入口方法
+	 * @return
+	 */
+	public void execCollectEBWordstoRedis(){
 		TreeSet<String> collectwords=null;
-		CollectEBHotWordsToRedis collectEBHotWordsToRedis=new CollectEBHotWordsToRedis();
-		while(true){
-			curhour=TimeFormatter.getHour();		
-			if(curhour.equals(prehour)==false){
-				collectwords=collectEBHotWordsToRedis.collectAllEletronicBusinessHotWords();
-				prehour=curhour;
-			}
+		try{
+			CollectEBHotWordsToRedis collectEBHotWordsToRedis=new CollectEBHotWordsToRedis();
+			collectwords=collectEBHotWordsToRedis.collectAllEletronicBusinessHotWords();
 			if(collectwords!=null&&collectwords.size()>0){
-				collectEBHotWordsToRedis.setEBHotWordsToRedis(collectwords); //每10分钟更新
+				collectEBHotWordsToRedis.setEBHotWordsToRedis(collectwords); 
 			}
-			try{					
-				Thread.sleep(1000*60*10);//休息10分钟
-			}catch(Exception ex){
-				logger.info(" Thread CollectEBHotWordsToRedis crashes: "+ex.getMessage());
-			}
+			logger.info(" Complete EB opt, words number: "+collectwords.size());
+		}catch(Exception ex){
+			logger.info(" Thread CollectEBHotWordsToRedis crashes: "+ex.getMessage());
 		}
 	}
 
