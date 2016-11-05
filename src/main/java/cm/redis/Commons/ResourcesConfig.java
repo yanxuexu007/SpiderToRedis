@@ -29,7 +29,7 @@ public class ResourcesConfig {
 	
 	//爬虫浏览器驱动信息配置,windows
 	public final static String BROWSER_DRIVER_NAME="webdriver.chrome.driver";
-	public final static String BROWSER_DRIVER_POSITION="C:\\Program Files\\Google\\Driver\\chromedriver.exe";
+	public final static String BROWSER_DRIVER_POSITION="C:\\Program Files\\Google\\Driver\\chromedriver.exe";//"C:\\Program Files (x86)\\Google\\Driver\\chromedriver.exe";
 	
 	//爬虫浏览器驱动信息配置,Linux
 //	public final static String BROWSER_DRIVER_NAME="webdriver.chrome.driver";

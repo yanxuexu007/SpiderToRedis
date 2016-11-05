@@ -41,15 +41,15 @@ public class CollectEBHotWordsToRedis {
 		String prehour=null;
 		String curhour=null;
 		TreeSet<String> collectwords=null;
+		CollectEBHotWordsToRedis collectEBHotWordsToRedis=new CollectEBHotWordsToRedis();
 		while(true){
-			curhour=TimeFormatter.getHour();
+			curhour=TimeFormatter.getHour();		
 			if(curhour.equals(prehour)==false){
-				CollectEBHotWordsToRedis collectEBHotWordsToRedis=new CollectEBHotWordsToRedis();
 				collectwords=collectEBHotWordsToRedis.collectAllEletronicBusinessHotWords();
 				prehour=curhour;
 			}
 			if(collectwords!=null&&collectwords.size()>0){
-				
+				collectEBHotWordsToRedis.setEBHotWordsToRedis(collectwords); //每10分钟更新
 			}
 			try{					
 				Thread.sleep(1000*60*10);//休息10分钟
@@ -153,10 +153,63 @@ public class CollectEBHotWordsToRedis {
 	 */
 	public void setEBHotWordsToRedis(TreeSet<String> collectwords){
 		if(collectwords==null||collectwords.size()>0)return;
-		//做法逻辑思路
+		//基本思路：
 		//1.取每个网站热搜词进行拆词，获取对应每个分词的base64编码，
 		//2.匹配每个分词在redis库中的热度情况
-		//3.计算网站热搜词总热度情况的公式为 所有分词的热度之和+(热度max分词*热度min在max中的比例)
-		
+		//3.计算网站热搜词的搜索指数计算公式：min词频*log(min,max)，表达式是最小词频乘以其对应最大词频的指数，
+		//表达的意思是，如果最大词频越大，则表示可能搜索之后对min词频产生的影响越大
+		//4.将热词以BASE64编码方式加入到集合中。
+		RedisClusterObj redisClusterObj=null;
+		List<Word> words = null;
+		String getbase64=null;
+		int min=-1;
+		int max=0;
+		int tmp=0;
+		double searchindex=0.0;
+		String key=null;
+		String value=null;
+		String tdate=null;
+		try{
+			redisClusterObj=RedisClusterObj.getInstance();
+			tdate=TimeFormatter.getDate2();//获取当前日期
+			for(String str: collectwords){
+				min=-1;
+				max=0;
+				searchindex=0.0;
+				words=WordSegmenter.seg(str);
+				if(words!=null&&words.isEmpty()==false){
+					for(int i=0;i<words.size();i++)
+					{
+						getbase64=words.get(i).getText();
+						getbase64=Base64.encodeBase64URLSafeString(getbase64.getBytes());
+						key="mfg4_"+tdate+"_Zh_"+getbase64;
+						value=redisClusterObj.get(key);
+						if(value!=null&&value.equals("nil")==false){
+							tmp=Integer.valueOf(value);
+							if(min<0||tmp<min)min=tmp;
+							if(tmp>max)max=tmp;
+						}
+					}
+					if(min>1&&max>0)searchindex=min*(Math.log(max)/Math.log(min));
+					max=(int) searchindex;
+				}
+				if(max>0){
+					getbase64=Base64.encodeBase64URLSafeString(str.getBytes());
+					key="mfg4_"+tdate+"_ebusiw_"+getbase64;
+					value=String.valueOf(max);
+					redisClusterObj.set(key, value);
+				}
+			}
+		}catch(Exception ex){
+			logger.info(" setEBHotWordsToRedis crashes: "+ex.getMessage());
+		}finally {
+			//释放内存
+			redisClusterObj=null;
+			words = null;
+			getbase64=null;
+			key=null;
+			value=null;
+			tdate=null;
+		}
 	}
 }
