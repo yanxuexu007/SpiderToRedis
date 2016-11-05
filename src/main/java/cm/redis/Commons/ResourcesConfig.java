@@ -21,7 +21,7 @@ public class ResourcesConfig {
 	public final static int CLUSTER_TIMEOUT=60*1000;						//获取集群连接的超时时间
 	public final static int CLUSTER_MAX_REDIRECTIONS=15; 			//获取重定向的次数
 	
-	public final static String REDIS_CLUSTER_IP="10.245.254.59";		//redis cluster数据库IP地址
+	public final static String REDIS_CLUSTER_IP="10.245.254.56";		//redis cluster数据库IP地址
 	public final static int REDIS_CLUSTER_PORT=7000;						//redis cluster数据库端口
 	
 	public final static String REDIS_SERVER_IP="10.245.254.56";		//redis合库后的数据库IP地址
