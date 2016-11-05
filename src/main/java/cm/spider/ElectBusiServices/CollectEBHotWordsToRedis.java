@@ -63,19 +63,19 @@ public class CollectEBHotWordsToRedis {
 	 * 提供给外部调用的 电商热词动态更新与统计搜索指数入口方法
 	 * @return
 	 */
-	public void execCollectEBWordstoRedis(){
-		TreeSet<String> collectwords=null;
-		try{
-			CollectEBHotWordsToRedis collectEBHotWordsToRedis=new CollectEBHotWordsToRedis();
-			collectwords=collectEBHotWordsToRedis.collectAllEletronicBusinessHotWords();
-			if(collectwords!=null&&collectwords.size()>0){
-				collectEBHotWordsToRedis.setEBHotWordsToRedis(collectwords); 
-			}
-			logger.info(" Complete EB opt, words number: "+collectwords.size());
-		}catch(Exception ex){
-			logger.info(" Thread CollectEBHotWordsToRedis crashes: "+ex.getMessage());
-		}
-	}
+//	public void execCollectEBWordstoRedis(){
+//		TreeSet<String> collectwords=null;
+//		try{
+//			CollectEBHotWordsToRedis collectEBHotWordsToRedis=new CollectEBHotWordsToRedis();
+//			collectwords=collectEBHotWordsToRedis.collectAllEletronicBusinessHotWords();
+//			if(collectwords!=null&&collectwords.size()>0){
+//				collectEBHotWordsToRedis.setEBHotWordsToRedis(collectwords); 
+//			}
+//			logger.info(" Complete EB opt, words number: "+collectwords.size());
+//		}catch(Exception ex){
+//			logger.info(" Thread CollectEBHotWordsToRedis crashes: "+ex.getMessage());
+//		}
+//	}
 
 	/**
 	 *每小时执行一次商品热搜词更新，将各个爬虫节点的热词进行合并归纳，加入redis集合中

@@ -34,17 +34,17 @@ public class CollectCommonWordsToRedis {
 	 * 提供给外部调用的 百度热搜热词动态更新与统计搜索指数入口方法
 	 * @return
 	 */
-	public void execCollectCommonWordstoRedis(){
-		int num=0;
-		try{
-			CollectCommonWordsToRedis collectCommonHotWordsToRedis=new CollectCommonWordsToRedis();
-			num=collectCommonHotWordsToRedis.collectAllBaiduHotWords();
-			collectCommonHotWordsToRedis.setBiaduHotWordsToRedis();
-			logger.info(" Complete Baidu opt, words number: "+num);
-		}catch(Exception ex){
-			logger.info(" Thread execCollectEBWordstoRedis crashes: "+ex.getMessage());
-		}
-	}
+//	public void execCollectCommonWordstoRedis(){
+//		int num=0;
+//		try{
+//			CollectCommonWordsToRedis collectCommonHotWordsToRedis=new CollectCommonWordsToRedis();
+//			num=collectCommonHotWordsToRedis.collectAllBaiduHotWords();
+//			collectCommonHotWordsToRedis.setBiaduHotWordsToRedis();
+//			logger.info(" Complete Baidu opt, words number: "+num);
+//		}catch(Exception ex){
+//			logger.info(" Thread execCollectEBWordstoRedis crashes: "+ex.getMessage());
+//		}
+//	}
 
 	/**
 	 *每小时执行一次商品热搜词更新，将各个爬虫节点的热词进行合并归纳，加入redis集合中
