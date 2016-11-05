@@ -60,7 +60,7 @@ public class CollectEBHotWordsToRedis {
 	}
 
 	/**
-	 *每小时执行一次商品热搜词更新，将各个爬虫节点的热词进行合并归纳，为业务需求，用于后续录入到redis做准备
+	 *每小时执行一次商品热搜词更新，将各个爬虫节点的热词进行合并归纳，加入redis集合中
 	 */
 	public TreeSet<String> collectAllEletronicBusinessHotWords(){
 		amazonCrawlerControl=new ChineseWordsAmazonCrawlController();
@@ -71,7 +71,11 @@ public class CollectEBHotWordsToRedis {
 		suningyigouCrawlerControl=new ChineseWordsSuNingYiGouCrawlController();
 		TreeSet<String> ebusinessHotWords=null;
 		TreeSet<String> unionallHotWords=null;
+		RedisClusterObj redisClusterObj=null;
+		String key=null;
+		String getbase64=null;
 		try{
+			redisClusterObj=RedisClusterObj.getInstance();
 			ebusinessHotWords=new TreeSet<String>();
 			unionallHotWords=new TreeSet<String>();
 
@@ -91,6 +95,13 @@ public class CollectEBHotWordsToRedis {
 			
 			//测试代码,测试ok
 			//int recnum=0;for(String str: unionallHotWords){recnum+=1;System.out.println("	"+recnum+":"+str);}
+			//数据加入到电商热搜词集合中
+			key="mfg4_EBusiSet";
+			for(String str: unionallHotWords)
+			{
+				getbase64=Base64.encodeBase64URLSafeString(str.getBytes());
+				redisClusterObj.sadd(key, getbase64);
+			}
 		}catch(Exception ex){
 			logger.info(" collectAllEletronicBusinessHotWords crashes : "+ex.getMessage());
 			unionallHotWords=null;
@@ -102,6 +113,10 @@ public class CollectEBHotWordsToRedis {
 			taobaoCrawlerControl=null;
 			yihaodianCrawlerControl=null;
 			suningyigouCrawlerControl=null;
+			ebusinessHotWords=null;
+			redisClusterObj=null;
+			key=null;
+			getbase64=null;
 		}
 		return unionallHotWords;
 	}
@@ -148,7 +163,7 @@ public class CollectEBHotWordsToRedis {
 	}
 	
 	/**
-	 *  每10分钟更新一次信息，根据当前用户的拆词排行信息，对电商中涉及的热词进行搜索指数计算，写入对应热搜词中保存，
+	 *  每10分钟更新一次信息，根据当前用户的拆词排行信息，对电商中涉及的热词进行搜索指数计算，写入对应热搜词中保存
 	 *  base来自于互联网用户url中的中文，机器拆词计数之后的数据
 	 */
 	public void setEBHotWordsToRedis(TreeSet<String> collectwords){
@@ -158,7 +173,6 @@ public class CollectEBHotWordsToRedis {
 		//2.匹配每个分词在redis库中的热度情况
 		//3.计算网站热搜词的搜索指数计算公式：min词频*log(min,max)，表达式是最小词频乘以其对应最大词频的指数，
 		//表达的意思是，如果最大词频越大，则表示可能搜索之后对min词频产生的影响越大
-		//4.将热词以BASE64编码方式加入到集合中。
 		RedisClusterObj redisClusterObj=null;
 		List<Word> words = null;
 		String getbase64=null;
