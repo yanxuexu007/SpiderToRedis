@@ -67,7 +67,7 @@ public class CollectCommonWordsToRedis {
 			
 			//测试代码,测试ok
 			//int recnum=0;for(String str: unionallHotWords){recnum+=1;System.out.println("	"+recnum+":"+str);}
-			//数据加入到电商热搜词集合中
+			//数据加入到baidu热搜词集合中
 			key="mfg4_BaiduSet";
 			for(String str:baiduHotWords.keySet())
 			{
