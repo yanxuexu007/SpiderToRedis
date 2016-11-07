@@ -75,7 +75,7 @@ public class CollectCommonWordsToRedis {
 				if(typeWords!=null&&typeWords.size()>0){
 					for(String value:typeWords){
 						value=str+"_"+value;
-						getbase64=Base64.encodeBase64URLSafeString(value.getBytes());
+						getbase64=Base64.encodeBase64URLSafeString(value.getBytes("UTF-8"));//对字符串按照UTF-8编码后再获取base64
 						redisClusterObj.sadd(key, getbase64);
 					}
 				}
@@ -134,7 +134,7 @@ public class CollectCommonWordsToRedis {
 							for(int i=0;i<words.size();i++)
 							{
 								getbase64=words.get(i).getText();
-								getbase64=Base64.encodeBase64URLSafeString(getbase64.getBytes());
+								getbase64=Base64.encodeBase64URLSafeString(getbase64.getBytes("UTF-8"));//对字符串按照UTF-8编码后再获取base64
 								key="mfg4_"+tdate+"_Zh_"+getbase64;
 								value=redisClusterObj.get(key);
 								if(value!=null&&value.equals("nil")==false){
@@ -148,7 +148,7 @@ public class CollectCommonWordsToRedis {
 						}
 						if(max>0){
 							str=typestr+"_"+str;
-							getbase64=Base64.encodeBase64URLSafeString(str.getBytes());
+							getbase64=Base64.encodeBase64URLSafeString(str.getBytes("UTF-8"));//对字符串按照UTF-8编码后再获取base64
 							key="mfg4_"+tdate+"_baiduw_"+getbase64;
 							value=String.valueOf(max);
 							redisClusterObj.set(key, value);

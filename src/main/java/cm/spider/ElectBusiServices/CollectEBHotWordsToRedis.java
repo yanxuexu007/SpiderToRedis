@@ -117,7 +117,7 @@ public class CollectEBHotWordsToRedis {
 			key="mfg4_EBusiSet";
 			for(String str: unionallHotWords)
 			{
-				getbase64=Base64.encodeBase64URLSafeString(str.getBytes());
+				getbase64=Base64.encodeBase64URLSafeString(str.getBytes("UTF8")); //对字节流按照UTF8编码
 				redisClusterObj.sadd(key, getbase64);
 			}
 		}catch(Exception ex){
@@ -213,7 +213,7 @@ public class CollectEBHotWordsToRedis {
 					for(int i=0;i<words.size();i++)
 					{
 						getbase64=words.get(i).getText();
-						getbase64=Base64.encodeBase64URLSafeString(getbase64.getBytes());
+						getbase64=Base64.encodeBase64URLSafeString(getbase64.getBytes("UTF-8")); //对字符串按照UTF-8编码后再获取base64
 						key="mfg4_"+tdate+"_Zh_"+getbase64;
 						value=redisClusterObj.get(key);
 						if(value!=null&&value.equals("nil")==false){
@@ -226,7 +226,7 @@ public class CollectEBHotWordsToRedis {
 					max=(int) searchindex;
 				}
 				if(max>0){
-					getbase64=Base64.encodeBase64URLSafeString(str.getBytes());
+					getbase64=Base64.encodeBase64URLSafeString(str.getBytes("UTF-8"));//对字符串按照UTF-8编码后再获取base64
 					key="mfg4_"+tdate+"_ebusiw_"+getbase64;
 					value=String.valueOf(max);
 					redisClusterObj.set(key, value);
