@@ -117,7 +117,7 @@ public class CollectEBHotWordsToRedis {
 			key="mfg4_EBusiSet";
 			for(String str: unionallHotWords)
 			{
-				getbase64=Base64.encodeBase64URLSafeString(str.getBytes("UTF8")); //对字节流按照UTF8编码
+				getbase64=Base64.encodeBase64URLSafeString(str.getBytes("UTF-8")); //对字节流按照UTF8编码
 				redisClusterObj.sadd(key, getbase64);
 			}
 		}catch(Exception ex){
