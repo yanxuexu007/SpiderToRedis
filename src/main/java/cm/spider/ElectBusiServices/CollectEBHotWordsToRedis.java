@@ -185,7 +185,7 @@ public class CollectEBHotWordsToRedis {
 	 *  base来自于互联网用户url中的中文，机器拆词计数之后的数据
 	 */
 	public void setEBHotWordsToRedis(TreeSet<String> collectwords){
-		if(collectwords==null||collectwords.size()>0)return;
+		if(collectwords==null||collectwords.size()<=0)return;
 		//基本思路：
 		//1.取每个网站热搜词进行拆词，获取对应每个分词的base64编码，
 		//2.匹配每个分词在redis库中的热度情况
