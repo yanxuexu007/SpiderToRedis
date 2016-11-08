@@ -26,7 +26,7 @@ import cm.spider.CrawlerControllers.ChineseWordsYiHaoDianCrawlController;
  */
 public class CollectEBHotWordsToRedis {
 	//电商对应的爬虫机器人
-	private ChineseWordsAmazonCrawlController amazonCrawlerControl;
+	//private ChineseWordsAmazonCrawlController amazonCrawlerControl;
 	private ChineseWordsVIPCrawlController vipCrawlerControl;
 	private ChineseWordsJingDongCrawlController jingdongCrawlerControl;
 	private ChineseWordsTaoBaoCrawlController taobaoCrawlerControl;
@@ -81,7 +81,7 @@ public class CollectEBHotWordsToRedis {
 	 *每小时执行一次商品热搜词更新，将各个爬虫节点的热词进行合并归纳，加入redis集合中
 	 */
 	public TreeSet<String> collectAllEletronicBusinessHotWords(){
-		amazonCrawlerControl=new ChineseWordsAmazonCrawlController();
+		//amazonCrawlerControl=new ChineseWordsAmazonCrawlController();
 		vipCrawlerControl=new ChineseWordsVIPCrawlController();
 		jingdongCrawlerControl=new ChineseWordsJingDongCrawlController();
 		taobaoCrawlerControl=new ChineseWordsTaoBaoCrawlController();
@@ -98,8 +98,8 @@ public class CollectEBHotWordsToRedis {
 			unionallHotWords=new TreeSet<String>();
 
 			//对所有的单词进行合并，排序去除重复项
-			ebusinessHotWords=amazonCrawlerControl.getAmazonHotSearchWords();
-			unionallHotWords=removeunvalidwords(ebusinessHotWords, unionallHotWords);
+			//ebusinessHotWords=amazonCrawlerControl.getAmazonHotSearchWords();
+			//unionallHotWords=removeunvalidwords(ebusinessHotWords, unionallHotWords);
 			ebusinessHotWords=vipCrawlerControl.getVIPHotSearchWords();
 			unionallHotWords=removeunvalidwords(ebusinessHotWords, unionallHotWords);
 			ebusinessHotWords=jingdongCrawlerControl.getJingDongHotSearchWords();
@@ -125,7 +125,7 @@ public class CollectEBHotWordsToRedis {
 			unionallHotWords=null;
 		}finally{
 			//释放内存
-			amazonCrawlerControl=null;
+			//amazonCrawlerControl=null;
 			vipCrawlerControl=null;
 			jingdongCrawlerControl=null;
 			taobaoCrawlerControl=null;
