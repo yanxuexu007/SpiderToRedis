@@ -40,7 +40,7 @@ public class ChineseWordsJingDongCrawlController {
 		TreeSet<String> hotSearchWordsList=null;
 		ChineseWordsJingDongCrawl jingdongCrawler=new ChineseWordsJingDongCrawl();
 		try{
-			hotSearchWordsList=jingdongCrawler.getJingDongHotWords("ttps://top.jd.com/#search");
+			hotSearchWordsList=jingdongCrawler.getJingDongHotWords("https://top.jd.com/#search");
 		}catch(Exception ex){
 			logger.info(" getJingDongHotSearchWords crashes :"+ex.getMessage());
 		}
