@@ -1,12 +1,12 @@
 package cm.spider.MainThread;
 
-import java.util.TreeSet;
+//import java.util.TreeSet;
 
 import org.apache.log4j.Logger;
 
 import cm.redis.Commons.TimeFormatter;
 import cm.spider.ElectBusiServices.CollectCommonWordsToRedis;
-import cm.spider.ElectBusiServices.CollectEBHotWordsToRedis;
+//import cm.spider.ElectBusiServices.CollectEBHotWordsToRedis;
 
 public class SpiderMianThread {
 	
