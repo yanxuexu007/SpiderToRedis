@@ -14,26 +14,28 @@ public class SpiderMianThread {
 	public static Logger logger=Logger.getLogger(SpiderMianThread.class);
 	
 	public static void main(String[] args) {
-		CollectEBHotWordsToRedis collectEBHotWordsToRedis=new CollectEBHotWordsToRedis();
+		//CollectEBHotWordsToRedis collectEBHotWordsToRedis=new CollectEBHotWordsToRedis();
 		CollectCommonWordsToRedis collectCommonWordsToRedis=new CollectCommonWordsToRedis();
 		String prehour=null;
 		String curhour=null;
-		TreeSet<String> collectwords=null;
+		int num=0;
+//		TreeSet<String> collectwords=null;
 		while(true){
+			num=0;
 			curhour=TimeFormatter.getHour();		
 			if(curhour.equals(prehour)==false){
-				collectwords=collectEBHotWordsToRedis.collectAllEletronicBusinessHotWords();
-				collectCommonWordsToRedis.collectAllBaiduHotWords();
+				//collectwords=collectEBHotWordsToRedis.collectAllEletronicBusinessHotWords();
+				num=collectCommonWordsToRedis.collectAllBaiduHotWords();
+				collectCommonWordsToRedis.setBiaduHotWordsToRedis();//每10分钟更新
 				prehour=curhour;
 			}
-			if(collectwords!=null&&collectwords.size()>0){
-				collectEBHotWordsToRedis.setEBHotWordsToRedis(collectwords); //每10分钟更新
-				logger.info(" Complete ElectronicBusiness Hot Words reference opt!!! ");
-			}
-			collectCommonWordsToRedis.setBiaduHotWordsToRedis();//每10分钟更新
-			logger.info(" Complete Baidu Hot Words reference opt!!! ");
+//			if(collectwords!=null&&collectwords.size()>0){
+//				collectEBHotWordsToRedis.setEBHotWordsToRedis(collectwords); //每10分钟更新
+//				logger.info(" Complete ElectronicBusiness Hot Words reference opt!!! ");
+//			}
+			if(num>=0)logger.info(" Complete get Baidu Hot Words: "+num+"!!! ");
 			try{					
-				Thread.sleep(1000*60*10);//休息10分钟
+				Thread.sleep(1000*60*60);//休息1小时
 			}catch(Exception ex){
 				logger.info(" Thread SpiderMianThread crashes: "+ex.getMessage());
 			}
