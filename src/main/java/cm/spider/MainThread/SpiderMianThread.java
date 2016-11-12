@@ -4,6 +4,7 @@ package cm.spider.MainThread;
 
 import org.apache.log4j.Logger;
 
+import cm.redis.Commons.RedisClusterObj;
 import cm.redis.Commons.TimeFormatter;
 import cm.spider.ElectBusiServices.CollectCommonWordsToRedis;
 //import cm.spider.ElectBusiServices.CollectEBHotWordsToRedis;
@@ -28,6 +29,7 @@ public class SpiderMianThread {
 				num=collectCommonWordsToRedis.collectAllBaiduHotWords();
 				collectCommonWordsToRedis.setBiaduHotWordsToRedis();//每10分钟更新
 				prehour=curhour;
+				RedisClusterObj.close();
 			}
 //			if(collectwords!=null&&collectwords.size()>0){
 //				collectEBHotWordsToRedis.setEBHotWordsToRedis(collectwords); //每10分钟更新
