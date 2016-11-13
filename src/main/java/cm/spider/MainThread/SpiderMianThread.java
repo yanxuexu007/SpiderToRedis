@@ -27,7 +27,7 @@ public class SpiderMianThread {
 			if(curhour.equals(prehour)==false){
 				//collectwords=collectEBHotWordsToRedis.collectAllEletronicBusinessHotWords();
 				num=collectCommonWordsToRedis.collectAllBaiduHotWords();
-				collectCommonWordsToRedis.setBiaduHotWordsToRedis();//每10分钟更新
+				collectCommonWordsToRedis.setBiaduHotWordsToRedis();//每小时更新
 				prehour=curhour;
 				RedisClusterObj.close();
 			}

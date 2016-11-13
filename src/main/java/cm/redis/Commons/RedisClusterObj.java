@@ -82,6 +82,7 @@ public class RedisClusterObj {
 		 try {
 			 if(jedisCluster!=null){
 				 jedisCluster.close();
+				 jedisCluster=null;
 				 INSTANCE=null;
 			 }
 		} catch (Exception e) {

@@ -59,6 +59,7 @@ public class CollectCommonWordsToRedis {
 		String key=null;
 		String getbase64=null;
 		try{
+			num=0;
 			redisClusterObj=RedisClusterObj.getInstance();
 			baiduHotWords=new HashMap<String, TreeSet<String>>();
 
@@ -77,12 +78,14 @@ public class CollectCommonWordsToRedis {
 						value=str+"_"+value;
 						getbase64=Base64.encodeBase64URLSafeString(value.getBytes("UTF-8"));//对字符串按照UTF-8编码后再获取base64
 						redisClusterObj.sadd(key, getbase64);
+						num+=1;
 					}
 				}
 			}
 		}catch(Exception ex){
 			logger.info(" collectAllBaiduHotWords crashes : "+ex.getMessage());
 			baiduHotWords=null;
+			num=-1;
 		}finally{
 			//释放内存
 			typeWords=null;
