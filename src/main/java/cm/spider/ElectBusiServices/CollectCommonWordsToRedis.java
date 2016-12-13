@@ -70,6 +70,7 @@ public class CollectCommonWordsToRedis {
 		RedisClusterObj redisClusterObj=null;
 		String key=null;
 		String getbase64=null;
+		boolean unvalid=false;
 		try{
 			num=0;
 			redisClusterObj=RedisClusterObj.getInstance();
@@ -88,11 +89,13 @@ public class CollectCommonWordsToRedis {
 				if(typeWords!=null&&typeWords.size()>0){
 					for(String value:typeWords){
 						//判断是会否为无效信息
-						
-						value=str+"_"+value;
-						getbase64=Base64.encodeBase64URLSafeString(value.getBytes("UTF-8"));//对字符串按照UTF-8编码后再获取base64
-						redisClusterObj.sadd(key, getbase64);
-						num+=1;
+						unvalid=fillterUnValidWords(value);
+						if(unvalid==false){
+							value=str+"_"+value;
+							getbase64=Base64.encodeBase64URLSafeString(value.getBytes("UTF-8"));//对字符串按照UTF-8编码后再获取base64
+							redisClusterObj.sadd(key, getbase64);
+							num+=1;
+						}
 					}
 				}
 			}
