@@ -26,6 +26,18 @@ public class CollectCommonWordsToRedis {
 	//用于日志的获取
 	public static Logger logger=Logger.getLogger(CollectCommonWordsToRedis.class);
 	
+	private static String not=null;
+	private static String[] nottmp=null;
+
+	public CollectCommonWordsToRedis(){
+		not="赌博,奇葩,六合,假牌,假证,迷药,杀人,放火,仿真枪,成人网,抢劫,偷盗,枪支,弹药,假冒,事变,政变,老千,法轮,全能神,全能教,邪教,"
+				+ "冰毒,摇头丸,大麻,造反,色吧,鸡鸡,手淫,性吧,性福,性欲,狠狠插,红灯区,卖淫,淫乱,爆乳,约炮,色情,情色,吞精,精液,艳照,淫荡,勾引,"
+				+ "爱爱,做爱,偷情,偷性,交配,撸管,色系,鸡巴,飞机杯,车震,露阴,震动棒,性用品,假阳具,龟头,毒品,吸毒,叫鸡,洗钱,黑钱,赌钱,性骚扰,裸奔,裸照,轮奸,强奸,色图,淫娃,"
+				+ "爆乳,妖姬,海天盛筵,生殖器,插插,壮阳,性故事,不雅照,一夜情,造爱,草榴,咪咪爱,阴蒂,阴唇,色色,走光,少妇,熟妇,熟女,日逼,操逼,黄图,"
+				+ "黄片,强暴,强奸,迷奸,乱伦,阴茎,性交,裸体,射精,鸡婆,性侵,打飞机,奶子,吸奶,喂奶,巨乳,乳交,口交,口爆";
+		nottmp=not.split(",");
+	}
+	
 	public static void main(String[] args) {
 		//主方法测试ok
 	}
@@ -75,6 +87,8 @@ public class CollectCommonWordsToRedis {
 				typeWords=baiduHotWords.get(str);
 				if(typeWords!=null&&typeWords.size()>0){
 					for(String value:typeWords){
+						//判断是会否为无效信息
+						
 						value=str+"_"+value;
 						getbase64=Base64.encodeBase64URLSafeString(value.getBytes("UTF-8"));//对字符串按照UTF-8编码后再获取base64
 						redisClusterObj.sadd(key, getbase64);
@@ -160,7 +174,7 @@ public class CollectCommonWordsToRedis {
 				}
 			}
 		}catch(Exception ex){
-			logger.info(" setBiaduHotWordsToRedis crashes: "+ex.getMessage());
+			logger.info(" setBaiduHotWordsToRedis crashes: "+ex.getMessage());
 		}finally {
 			//释放内存
 			redisClusterObj=null;
@@ -172,5 +186,23 @@ public class CollectCommonWordsToRedis {
 			value=null;
 			tdate=null;
 		}
+	}
+	
+	/**
+	 * 过滤 邪黄赌毒，敏感信息，同时可减少数据量
+	 * @param str
+	 * @return true代表包含黄赌毒，或者敏感信息，不做热词统计
+	 */
+	public boolean fillterUnValidWords(String str)
+	{
+		if(str==null||str.trim().equals("")==true)return true;
+		str=str.trim();
+		if(nottmp!=null&&nottmp.length>0){
+			for(int i=0;i<nottmp.length;i++)
+			{
+				if(str.contains(nottmp[i])==true)return true;
+			}
+		}
+		return false;
 	}
 }
