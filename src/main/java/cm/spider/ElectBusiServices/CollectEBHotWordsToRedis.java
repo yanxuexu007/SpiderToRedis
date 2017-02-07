@@ -12,7 +12,7 @@ import cm.redis.Commons.RedisClusterObj;
 import cm.redis.Commons.TimeFormatter;
 //import cm.spider.CrawlerControllers.ChineseWordsAmazonCrawlController;
 import cm.spider.CrawlerControllers.ChineseWordsJingDongCrawlController;
-import cm.spider.CrawlerControllers.ChineseWordsSuNingYiGouCrawlController;
+//import cm.spider.CrawlerControllers.ChineseWordsSuNingYiGouCrawlController;
 import cm.spider.CrawlerControllers.ChineseWordsTaoBaoCrawlController;
 import cm.spider.CrawlerControllers.ChineseWordsVIPCrawlController;
 import cm.spider.CrawlerControllers.ChineseWordsYiHaoDianCrawlController;
