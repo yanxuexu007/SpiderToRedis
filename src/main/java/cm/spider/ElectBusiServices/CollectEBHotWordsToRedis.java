@@ -31,7 +31,7 @@ public class CollectEBHotWordsToRedis {
 	private ChineseWordsJingDongCrawlController jingdongCrawlerControl;
 	private ChineseWordsTaoBaoCrawlController taobaoCrawlerControl;
 	private ChineseWordsYiHaoDianCrawlController yihaodianCrawlerControl;
-	private ChineseWordsSuNingYiGouCrawlController suningyigouCrawlerControl;
+	//private ChineseWordsSuNingYiGouCrawlController suningyigouCrawlerControl;
 	
 	private static String not=null;
 	private static String[] nottmp=null;
@@ -98,7 +98,7 @@ public class CollectEBHotWordsToRedis {
 		jingdongCrawlerControl=new ChineseWordsJingDongCrawlController();
 		taobaoCrawlerControl=new ChineseWordsTaoBaoCrawlController();
 		yihaodianCrawlerControl=new ChineseWordsYiHaoDianCrawlController();
-		suningyigouCrawlerControl=new ChineseWordsSuNingYiGouCrawlController();
+		//suningyigouCrawlerControl=new ChineseWordsSuNingYiGouCrawlController();
 		TreeSet<String> ebusinessHotWords=null;
 		TreeSet<String> unionallHotWords=null;
 		RedisClusterObj redisClusterObj=null;
@@ -121,8 +121,8 @@ public class CollectEBHotWordsToRedis {
 			unionallHotWords=removeunvalidwords(ebusinessHotWords, unionallHotWords);
 			ebusinessHotWords=yihaodianCrawlerControl.getYiHaoDianHotSearchWords();
 			unionallHotWords=removeunvalidwords(ebusinessHotWords, unionallHotWords);
-			ebusinessHotWords=suningyigouCrawlerControl.getSuNingYiGouHotSearchWords();
-			unionallHotWords=removeunvalidwords(ebusinessHotWords, unionallHotWords);
+			//ebusinessHotWords=suningyigouCrawlerControl.getSuNingYiGouHotSearchWords();
+			//unionallHotWords=removeunvalidwords(ebusinessHotWords, unionallHotWords);
 			
 			//测试代码,测试ok
 			//int recnum=0;for(String str: unionallHotWords){recnum+=1;System.out.println("	"+recnum+":"+str);}
@@ -147,7 +147,7 @@ public class CollectEBHotWordsToRedis {
 			jingdongCrawlerControl=null;
 			taobaoCrawlerControl=null;
 			yihaodianCrawlerControl=null;
-			suningyigouCrawlerControl=null;
+			//suningyigouCrawlerControl=null;
 			ebusinessHotWords=null;
 			redisClusterObj=null;
 			key=null;

@@ -36,7 +36,7 @@ public class SpiderMianThread {
 			if(collectwords!=null&&collectwords.size()>0)logger.info(" Complete get ElectronicBusiness Hot Words: "+collectwords.size()+"!!!");
 			if(num>=0)logger.info(" Complete get Baidu Hot Words: "+num+"!!! ");
 			try{					
-				Thread.sleep(1000*60*60);//休息1小时
+				Thread.sleep(1000*60*60*12);//休息12小时
 			}catch(Exception ex){
 				logger.info(" Thread SpiderMianThread crashes: "+ex.getMessage());
 			}
