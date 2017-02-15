@@ -69,7 +69,7 @@ public class ChineseWordsAmazonCrawl {
 			initWebDriver();
 			topWords=new TreeSet<String>();
 			if(href!=null&&URLFILTER.matcher(href).matches()){
-		        //获取首页页面s
+		        //获取首页页面
 		        webDriver.get(href);
 		        
 		        //亚马逊排行首页页面规律分析，详见本方法中有关页面的注释说明，以下代码针对页面分析之后做的开发，页面发生变化，则代码需要修改
