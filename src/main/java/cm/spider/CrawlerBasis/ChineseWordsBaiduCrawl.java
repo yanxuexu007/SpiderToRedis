@@ -72,7 +72,7 @@ public class ChineseWordsBaiduCrawl  {
 		        webDriver.get(href);
 		        
 		        //百度热搜页面规律分析，详见本方法中有关页面的注释说明，以下代码针对页面分析之后做的开发，页面发生变化，则代码需要修改
-		        //20161030深度定制爬虫逻辑如下：
+		        //20161030深度定制爬虫逻辑如下：      
 		        crawltags=webDriver.findElements(By.xpath("//*[@id=\"main\"]/div/div[1]/h3/a")); //获取main中所有的h3标签下的a内容
 	        	if(crawltags!=null&&crawltags.size()>0){
 	        		for(int i=0;i<crawltags.size();i++){
