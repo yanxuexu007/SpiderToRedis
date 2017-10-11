@@ -30,7 +30,7 @@ public class CollectEBHotWordsToRedis {
 	private ChineseWordsVIPCrawlController vipCrawlerControl;
 	private ChineseWordsJingDongCrawlController jingdongCrawlerControl;
 	private ChineseWordsTaoBaoCrawlController taobaoCrawlerControl;
-	private ChineseWordsYiHaoDianCrawlController yihaodianCrawlerControl;
+	//private ChineseWordsYiHaoDianCrawlController yihaodianCrawlerControl;
 	//private ChineseWordsSuNingYiGouCrawlController suningyigouCrawlerControl;
 	
 	private static String not=null;
@@ -97,7 +97,7 @@ public class CollectEBHotWordsToRedis {
 		vipCrawlerControl=new ChineseWordsVIPCrawlController();
 		jingdongCrawlerControl=new ChineseWordsJingDongCrawlController();
 		taobaoCrawlerControl=new ChineseWordsTaoBaoCrawlController();
-		yihaodianCrawlerControl=new ChineseWordsYiHaoDianCrawlController();
+		//yihaodianCrawlerControl=new ChineseWordsYiHaoDianCrawlController();
 		//suningyigouCrawlerControl=new ChineseWordsSuNingYiGouCrawlController();
 		TreeSet<String> ebusinessHotWords=null;
 		TreeSet<String> unionallHotWords=null;
@@ -119,8 +119,8 @@ public class CollectEBHotWordsToRedis {
 			unionallHotWords=removeunvalidwords(ebusinessHotWords, unionallHotWords);
 			ebusinessHotWords=taobaoCrawlerControl.getTaobaoHotSearchWords();
 			unionallHotWords=removeunvalidwords(ebusinessHotWords, unionallHotWords);
-			ebusinessHotWords=yihaodianCrawlerControl.getYiHaoDianHotSearchWords();
-			unionallHotWords=removeunvalidwords(ebusinessHotWords, unionallHotWords);
+			//ebusinessHotWords=yihaodianCrawlerControl.getYiHaoDianHotSearchWords();
+			//unionallHotWords=removeunvalidwords(ebusinessHotWords, unionallHotWords);
 			//ebusinessHotWords=suningyigouCrawlerControl.getSuNingYiGouHotSearchWords();
 			//unionallHotWords=removeunvalidwords(ebusinessHotWords, unionallHotWords);
 			
@@ -146,7 +146,7 @@ public class CollectEBHotWordsToRedis {
 			vipCrawlerControl=null;
 			jingdongCrawlerControl=null;
 			taobaoCrawlerControl=null;
-			yihaodianCrawlerControl=null;
+			//yihaodianCrawlerControl=null;
 			//suningyigouCrawlerControl=null;
 			ebusinessHotWords=null;
 			redisClusterObj=null;
