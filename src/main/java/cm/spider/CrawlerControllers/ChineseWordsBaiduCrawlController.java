@@ -19,24 +19,24 @@ public class ChineseWordsBaiduCrawlController {
 	//测试Crawl方法
 	public static void main(String[] args) throws Exception {
 		//测试从后台获取百度热门搜索关键词,20161031,ok
-//		Map<String, String> topIndexList=null;
-//		Map<String,  TreeSet<String>> typesTopZhWords=null;
-//		TreeSet<String> hotZhWords=null;
-//		ChineseWordsBaiduCrawl baiduCrawler=new ChineseWordsBaiduCrawl();
-//		int recnum=0;
-//		topIndexList=baiduCrawler.getBDHotZhTypesAndLinks("http://top.baidu.com/boards?fr=topindex"); //种子文件起始地址
-//		typesTopZhWords=baiduCrawler.getBDHotZhDetail(topIndexList);
-//		if(typesTopZhWords!=null&&typesTopZhWords.size()>0){
-//			for (String key : typesTopZhWords.keySet()){
-//				System.out.println(key+": ");
-//				hotZhWords=typesTopZhWords.get(key);
-//				recnum=0;
-//				for (String str : hotZhWords) {
-//					  recnum+=1;
-//				      System.out.println("	"+recnum+":	"+str);
-//				}
-//			}
-//		}
+		Map<String, String> topIndexList=null;
+		Map<String,  TreeSet<String>> typesTopZhWords=null;
+		TreeSet<String> hotZhWords=null;
+		ChineseWordsBaiduCrawl baiduCrawler=new ChineseWordsBaiduCrawl();
+		int recnum=0;
+		topIndexList=baiduCrawler.getBDHotZhTypesAndLinks("http://top.baidu.com/boards?fr=topindex"); //种子文件起始地址
+		typesTopZhWords=baiduCrawler.getBDHotZhDetail(topIndexList);
+		if(typesTopZhWords!=null&&typesTopZhWords.size()>0){
+			for (String key : typesTopZhWords.keySet()){
+				System.out.println(key+": ");
+				hotZhWords=typesTopZhWords.get(key);
+				recnum=0;
+				for (String str : hotZhWords) {
+					  recnum+=1;
+				      System.out.println("	"+recnum+":	"+str);
+				}
+			}
+		}
 	}
 	
 	/**
